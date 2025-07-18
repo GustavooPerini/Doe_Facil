@@ -1,0 +1,38 @@
+services:
+  database:
+    image: mysql
+    container_name: doefacil-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: doefacil
+    ports:
+      - 3306:3306
+
+  phpmydamin:
+    image: phpmyadmin
+    container_name: doefacil-phpmyadmin
+    ports:
+      - 8888:80
+    depends_on:
+      - database
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+      UPLOAD_LIMIT: 300M
+
+  frontend:
+    image: doefacil
+    container_name: doefacil-backfront
+    ports:
+      - 8080:8080
+      - 4200:4200
+    build:
+      context: ./back-front
+      dockerfile: Dockerfile
+    volumes:
+      - ../doefacil-frontend/:/app/doefacil-frontend
+      - ../doefacil-backend/:/app/doefacil-backend
+    stdin_open: true
+
+
