@@ -11,4 +11,10 @@ import com.projeto.doe_facil.model.UserModel;
 public interface UserRepository extends JpaRepository<UserModel, Long>{
 
     Optional<UserModel> findByUserName(String userName);
+
+    boolean existsByAppName(String appName);
+
+    boolean existsByUserName(String userName);
+
+    boolean existsByEmail(String email);
 }

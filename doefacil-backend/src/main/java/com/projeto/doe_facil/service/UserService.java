@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.projeto.doe_facil.model.UserModel;
 import com.projeto.doe_facil.repository.UserRepository;
 
 @Service
@@ -20,6 +21,22 @@ public class UserService implements UserDetailsService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, username)));
+    }
+
+    public UserModel save(UserModel userModel) {
+        return userRepository.save(userModel);
+    }
+
+    public boolean existsByAppName(String appName) {
+        return userRepository.existsByAppName(appName);
+    }
+
+    public boolean existsByUserName(String userName) {
+        return userRepository.existsByUserName(userName);
+    }
+
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
     
 }

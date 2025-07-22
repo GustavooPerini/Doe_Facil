@@ -6,15 +6,16 @@ import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class UserModel implements UserDetails{
 
     @Id
@@ -42,7 +43,7 @@ public class UserModel implements UserDetails{
     public UserModel(String appName, String userName, String passwd, String email, String role, boolean allowed) {
         this.appName = appName;
         this.userName = userName;
-        this.setPasswd(passwd);
+        this.passwd = passwd;
         this.email = email;
         this.role = role;
         this.allowed = allowed;
@@ -58,7 +59,7 @@ public class UserModel implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("USER");
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + this.role);
         return Collections.singletonList(authority);
     }
 
@@ -149,6 +150,6 @@ public class UserModel implements UserDetails{
     }
 
     public void setPasswd(String passwd) {
-        this.passwd = new BCryptPasswordEncoder().encode(passwd);
+        this.passwd = passwd;
     }
 }
