@@ -5,25 +5,18 @@ import jakarta.validation.constraints.NotBlank;
 public class UserDTO {
     
     @NotBlank
-    private String appName;
-
-    @NotBlank
     private String userName;
 
     @NotBlank
-    private String passwd;
+    private String login;
+
+    @NotBlank
+    private String password;
 
     @NotBlank
     private String email;
 
-    public String getAppName() {
-        return appName;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
+    
     public String getUserName() {
         return userName;
     }
@@ -32,12 +25,20 @@ public class UserDTO {
         this.userName = userName;
     }
 
-    public String getPasswd() {
-        return passwd;
+    public String getLogin() {
+        return login;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {

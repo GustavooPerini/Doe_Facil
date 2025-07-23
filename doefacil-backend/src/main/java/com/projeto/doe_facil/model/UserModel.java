@@ -1,14 +1,18 @@
 package com.projeto.doe_facil.model;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.projeto.doe_facil.utils.enums.UserRole;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,27 +27,28 @@ public class UserModel implements UserDetails{
     private Long id;
 
     @Column(nullable = false)
-    private String appName;
-
-    @Column(nullable = false)
     private String userName;
 
     @Column(nullable = false)
-    private String passwd;
+    private String login;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @Column(nullable = false)
     private boolean allowed;
 
-    public UserModel(String appName, String userName, String passwd, String email, String role, boolean allowed) {
-        this.appName = appName;
+    public UserModel(String userName, String login, String password, String email, UserRole role, boolean allowed) {
         this.userName = userName;
-        this.passwd = passwd;
+        this.login = login;
+        this.password = password;
         this.email = email;
         this.role = role;
         this.allowed = allowed;
@@ -59,18 +64,22 @@ public class UserModel implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + this.role);
-        return Collections.singletonList(authority);
+        if(this.role == UserRole.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        }
+        else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
     }
 
     @Override
     public String getPassword() {
-       return this.passwd;
+       return this.password;
     }
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.login;
     }
 
     @Override
@@ -105,20 +114,20 @@ public class UserModel implements UserDetails{
         this.id = id;
     }
 
-    public String getAppName() {
-        return appName;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getEmail() {
@@ -129,11 +138,11 @@ public class UserModel implements UserDetails{
         this.email = email;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
@@ -145,11 +154,7 @@ public class UserModel implements UserDetails{
         this.allowed = allowed;
     }
 
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
