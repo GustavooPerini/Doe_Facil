@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projeto.doe_facil.dto.AuthenticationDTO;
 import com.projeto.doe_facil.dto.UserDTO;
 import com.projeto.doe_facil.model.UserModel;
+import com.projeto.doe_facil.security.TokenService;
 import com.projeto.doe_facil.service.UserService;
 import com.projeto.doe_facil.utils.enums.UserRole;
 
@@ -30,13 +31,18 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
+    public ResponseEntity<Object> login(@RequestBody @Valid AuthenticationDTO data) {
         
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((UserModel)auth.getPrincipal());
+
+        return ResponseEntity.ok(token);
     }
 
     @PostMapping("/register")

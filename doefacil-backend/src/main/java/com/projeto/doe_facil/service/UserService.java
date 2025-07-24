@@ -1,5 +1,8 @@
 package com.projeto.doe_facil.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +25,18 @@ public class UserService implements UserDetailsService{
 
     public UserModel save(UserModel userModel) {
         return userRepository.save(userModel);
+    }
+
+    public List<UserModel> findAll() {
+        return userRepository.findAll();
+    }
+
+    public Optional<UserModel> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public void deleteUser(UserModel user) {
+        userRepository.delete(user);
     }
 
     public boolean existsByUserName(String userName) {
