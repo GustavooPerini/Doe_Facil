@@ -1,4 +1,4 @@
-import User from "src/app/models/User";
+import User from "../../../models/User";
 import { Component, Input } from "@angular/core";
 import {
 	cilHospital,
@@ -14,6 +14,7 @@ import {
 	faSprayCan,
 	faUserDoctor,
 	faUsers,
+	faBox,
 } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -34,6 +35,7 @@ export class WidgetsGeneralComponent {
 		faUserDoctor,
 		faBandage,
 		faSprayCan,
+		faBox
 	};
 	/**********************************************************************/
 	public totalPatients: string = "-";

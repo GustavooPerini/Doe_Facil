@@ -71,7 +71,7 @@ export class UserNewComponent {
                             this.validationFormsService.formRules.nonEmpty
                         ),
                         Validators.minLength(
-                            this.validationFormsService.formRules.userNameMin
+                            this.validationFormsService.formRules.loginMin
                         )
                     ],
                 ],

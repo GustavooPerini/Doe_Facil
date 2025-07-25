@@ -67,8 +67,8 @@ export class RegisterComponent {
     public createForm() {
         this.registerForm = this.formBuilder.group(
             {
-                fullName: ["", [Validators.required]],
-                userName: [
+                userName: ["", [Validators.required]],
+                login: [
                     "",
                     [
                         Validators.required,
@@ -76,7 +76,7 @@ export class RegisterComponent {
                             this.validationFormsService.formRules.nonEmpty
                         ),
                         Validators.minLength(
-                            this.validationFormsService.formRules.userNameMin
+                            this.validationFormsService.formRules.loginMin
                         )
                     ],
                 ],
@@ -107,7 +107,6 @@ export class RegisterComponent {
                         ),
                     ],
                 ],
-                accept: [false, [Validators.requiredTrue]],
             },
             { validators: [PasswordValidators.confirmPassword] }
         );
@@ -132,8 +131,8 @@ export class RegisterComponent {
 			//atribuição dos valores do formulário para o modelo "user"
 
             this.user = new User();
-            this.user.fullName = this.registerForm.value.fullName;
             this.user.userName = this.registerForm.value.userName;
+            this.user.login = this.registerForm.value.login;
             this.user.passwd = this.registerForm.value.password;
             this.user.email = this.registerForm.value.email;
             this.user.allowed = false;

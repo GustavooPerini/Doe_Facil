@@ -12,7 +12,7 @@ import { UserService } from "./services/user.service";
 	template: `<router-outlet *ngIf="userData"></router-outlet>`,
 })
 export class AppComponent implements OnInit {
-	title = "Amamenta";
+	title = "Doe Fácil";
 
 	constructor(
 		private router: Router,

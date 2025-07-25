@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "src/app/services/user.service";
+import { UserService } from "../../../services/user.service";
 import { ActivatedRoute } from "@angular/router";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import User from "src/app/models/User";
+
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ValidationFormsService } from "../../../services/validation-forms.service";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import User from "../../../models/User";
 
 @Component({
 	selector: "app-user-edit",
@@ -82,7 +83,7 @@ export class UserEditComponent implements OnInit {
 		this.editForm.patchValue({
 			email: loggedUser.email,
 			userName: loggedUser.userName,
-			fullName: loggedUser.fullName,
+			fullName: loggedUser.login,
 		});
 
 		this.userService.findByUserName(loggedUser.userName).subscribe({

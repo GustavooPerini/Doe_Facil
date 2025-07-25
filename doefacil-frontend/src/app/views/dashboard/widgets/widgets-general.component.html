@@ -10,11 +10,11 @@
 		<c-row class="align-itens-center" [lg]="2" [md]="2" [sm]="2">
 			<c-col lg="6" xs="12">
 				<c-widget-stat-f
-					[title]="'Mulheres cadastradas'"
+					[title]="'Usuários cadastrados'"
 					class="mb-3"
 					color="success"
 					padding
-					[value]="100"
+					[value]="25"
 				>
 					<ng-template cTemplateId="widgetIconTemplate">
 						<fa-icon
@@ -27,15 +27,15 @@
 
 			<c-col lg="6" xs="12">
 				<c-widget-stat-f
-					[title]="'Agendamentos de coleta'"
+					[title]="'Itens cadastrados para doação'"
 					class="mb-3"
 					color="info"
 					padding
-					[value]="7"
+					[value]="100"
 				>
 					<ng-template cTemplateId="widgetIconTemplate">
 						<fa-icon
-							[icon]="icons.faUserDoctor"
+							[icon]="icons.faBox"
 							class="fa-lg pad-btn"
 						></fa-icon>
 					</ng-template>

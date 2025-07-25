@@ -5,13 +5,13 @@
 	id="sidebar"
 	visible
 >
-	<c-sidebar-brand
+	<!-- <c-sidebar-brand
 		style="background: #fff; border-right: 0.1rem solid #ccc"
 		[brandFull]="{
 			src: 'assets/img/brand/logo-nome.png',
 			width: 200,
 			height: 46,
-			alt: 'Amamenta Logo'
+			alt: 'Amamenta Logo',
 		}"
 		[brandNarrow]="{
 			src: 'assets/img/brand/logo-amamenta-sem-fundo.png',
@@ -21,7 +21,14 @@
 		}"
 		routerLink="./"
 	>
-	</c-sidebar-brand>
+	</c-sidebar-brand> -->
+
+	<c-sidebar-header
+		style="display: flex; align-items: center; justify-content: center; cursor: pointer;"
+		routerLink="./"
+	>
+		Doe Fácil
+	</c-sidebar-header>
 	
 		<c-sidebar-nav [navItems]="navItems" dropdownMode="close">
 		</c-sidebar-nav>

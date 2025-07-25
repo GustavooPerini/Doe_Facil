@@ -10,14 +10,14 @@ export class ValidationFormsService {
 
     formRules = {
         nonEmpty: "^[a-zA-Z0-9_-]+([_-][a-zA-Z0-9]+)*$",
-        userNameMin: 5,
+        loginMin: 5,
         passwordMin: 6,
         passwordPattern: "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}",
     };
 
     formErrors = {
-        fullName: "",
         userName: "",
+        login: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -26,12 +26,12 @@ export class ValidationFormsService {
 
     constructor() {
         this.errorMessages = {
-            fullName: {
+            userName: {
                 required: "O nome completo é obrigatório",
             },
-            userName: {
-                required: "O nome de usuário é obrigatório",
-                minLength: `O nome de usuário deve ter ${this.formRules.userNameMin} caracteres ou mais`,
+            login: {
+                required: "O login é obrigatório",
+                minLength: `O login deve ter ${this.formRules.loginMin} caracteres ou mais`,
                 pattern:
                     "Deve conter letras e/ou números, sem espaços a direita ou caracteres especiais",
             },
@@ -48,9 +48,6 @@ export class ValidationFormsService {
             confirmPassword: {
                 required: "A confirmação de senha é requerida",
                 passwordMismatch: "As senhas devem ser iguais",
-            },
-            accept: {
-                requiredTrue: "Você tem que aceitar nossos termos de uso",
             },
         };
     }

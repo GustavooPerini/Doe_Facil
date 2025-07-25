@@ -10,13 +10,10 @@
 								[formGroup]="loginForm"
 								cForm
 							>
-								<img
-									src="../../../assets/img/brand/logo-nome.png"
-									class="logoAmamenta"
-								/>
-								<br /><br />
+								<h2>Doe fácil</h2>
+								
 								<p class="text-medium-emphasis">
-									Entre com seu nome de usuário e senha para
+									Entre com seu login e senha para
 									acessar o sistema
 								</p>
 								<br />
@@ -32,7 +29,7 @@
 										formControlName="username"
 										cFormControl
 										required
-										placeholder="Usuário"
+										placeholder="Login"
 									/>
 								</c-input-group>
 								<c-input-group class="mb-4">
@@ -66,7 +63,6 @@
 									<br />
 									<div>
 										<br />
-										<br />
 										<div class="d-flex justify-content-center">
 											<a
 												(click)="toggleRetrievePassword()"
@@ -90,15 +86,12 @@
 								<h2>Cadastrar no sistema</h2>
 								<br />
 								<p>
-									Caso você não tenha um nome de usuário e
-									senha é necessário cadastrar no sistema e
-									esperar pela liberação de um administrador.
+									Caso você não tenha um login e
+									senha é necessário se cadastrar no sistema.
 								</p>
 								<p>
 									Para realizar o cadastro, basta clicar no
-									botão abaixo. Na sequência entre um contato
-									com um administrador para liberar o seu
-									acesso.
+									botão abaixo.
 								</p>
 								<button
 									[active]="true"
@@ -115,15 +108,6 @@
 									Cadastrar
 								</button>
 								<br /><br />
-								<p>
-									<a class="text-white" routerLink="/terms"
-										>Termos de Uso</a
-									>
-									e
-									<a class="text-white" routerLink="/policy"
-										>Políticas de Privacidade</a
-									>
-								</p>
 							</div>
 						</c-card-body>
 					</c-card>

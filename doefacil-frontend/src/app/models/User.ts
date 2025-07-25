@@ -2,8 +2,8 @@ import { DEFAULT_ROLE } from "../../environments/environment";
 
 export default class User {
 
-	public fullName: string = 'DEV_MODE';
-	public userName: string = '';
+	public userName: string = 'DEV_MODE';
+	public login: string = '';
 	public passwd: string = '';
 	public email: string = '';
 	public allowed: boolean = false;
@@ -17,9 +17,9 @@ export default class User {
 	}
 
 	public updateUser(object : any){
-		this.fullName = object.fullName.toUpperCase();
+		this.userName = object.userName.toUpperCase();
 		this.email = object.email.toLowerCase();
-		this.userName = object.userName.toLowerCase();
+		this.login = object.login.toLowerCase();
 		this.passwd = object.passwd;
 		this.allowed = object.allowed;
 		this.role = object.role;
@@ -33,8 +33,8 @@ export default class User {
 	}
 
 	public print(): void {
-		console.log("NomeCompleto: " + this.fullName);
-		console.log("nomeUsuario: " + this.userName);
+		console.log("NomeCompleto: " + this.userName);
+		console.log("nomeUsuario: " + this.login);
 		console.log("senha: " + this.passwd);
 		console.log("email: " + this.email);
 		console.log("allowed: " + this.allowed);

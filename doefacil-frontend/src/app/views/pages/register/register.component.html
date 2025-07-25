@@ -36,22 +36,22 @@
 							(ngSubmit)="onSubmit()"
 						>
 							<c-row class="mb-3">
-								<label cCol [sm]="4" cLabel="col" for="fullName"
-									>Nome Completo</label
+								<label cCol [sm]="4" cLabel="col" for="userName"
+									>Nome de Usuário</label
 								>
 								<c-col
 									[sm]="8"
 									*ngIf="
 										registerForm.controls[
-											'fullName'
+											'userName'
 										] as ctrl
 									"
 								>
 									<input
 										cFormControl
-										id="fullName"
-										formControlName="fullName"
-										placeholder="Nome Completo"
+										id="userName"
+										formControlName="userName"
+										placeholder="Nome de Usuário"
 										autocomplete="off"
 										required
 										[autofocus]="true"
@@ -72,29 +72,29 @@
 											*ngIf="ctrl.errors as errors"
 										>
 											<div *ngIf="errors.required">
-												O nome completo é obrigatório!
+												O nome de usuário é obrigatório!
 											</div>
 										</ng-container>
 									</c-form-feedback>
 								</c-col>
 							</c-row>
 							<c-row class="mb-3">
-								<label cCol [sm]="4" cLabel="col" for="userName"
-									>Nome de Usuário</label
+								<label cCol [sm]="4" cLabel="col" for="login"
+									>Login</label
 								>
 								<c-col
 									[sm]="8"
 									*ngIf="
 										registerForm.controls[
-											'userName'
+											'login'
 										] as ctrl
 									"
 								>
 									<input
 										cFormControl
-										id="userName"
-										formControlName="userName"
-										placeholder="Nome de Usuário"
+										id="login"
+										formControlName="login"
+										placeholder="Login"
 										autocomplete="off"
 										required
 										[valid]="
@@ -114,17 +114,17 @@
 											*ngIf="ctrl.errors as errors"
 										>
 											<div *ngIf="errors.required">
-												O nome de usuário é obrigatório!
+												O login é obrigatório!
 											</div>
 											<div *ngIf="errors.minlength">
 												{{
-													formErrors.userName
+													formErrors.login
 														.minLength
 												}}
 											</div>
 											<div *ngIf="errors.pattern">
 												{{
-													formErrors.userName.pattern
+													formErrors.login.pattern
 												}}
 											</div>
 										</ng-container>
@@ -286,54 +286,6 @@
 									</c-form-feedback>
 								</c-col>
 							</c-row>
-							<c-row class="mb-3">
-								<c-col
-									*ngIf="
-										registerForm.controls['accept'] as ctrl
-									"
-								>
-									<c-form-check>
-										<input
-											cFormCheckInput
-											type="checkbox"
-											id="accept"
-											formControlName="accept"
-											required
-											[valid]="
-												ctrl.valid
-													? true
-													: submitted && ctrl.invalid
-													? false
-													: undefined
-											"
-										/>
-										<label
-											cFormCheckLabel
-											custom
-											for="accept"
-											>Eu aceito os
-											<a
-												routerLink="/terms"
-												target="_blank"
-												>Termos de Uso</a
-											>
-										</label>
-										<c-form-feedback
-											*ngIf="submitted && ctrl.invalid"
-											[valid]="false"
-										>
-											<ng-container
-												*ngIf="ctrl.errors as errors"
-											>
-												<div *ngIf="errors.required">
-													Você tem que aceitar nossos
-													termos de uso
-												</div>
-											</ng-container>
-										</c-form-feedback>
-									</c-form-check>
-								</c-col>
-							</c-row>
 							<div class="d-grid gap-2">
 								<button
 									cButton
@@ -366,9 +318,8 @@
 					style="font-size: 18px"
 				>
 					Seu cadastro foi realizado com sucesso. Porém, você ainda
-					não possui acesso ao sistema. É necessário que um
-					administrador libere o seu acesso. Se você precisa de acesso
-					imediato, entre em contato com a coordenação do Amamenta.
+					não possui acesso ao sistema. É necessário que você confirme
+					seu registro pelo e-mail.
 				</div>
 			</c-modal-body>
 			<c-modal-footer>
@@ -400,8 +351,7 @@
 				>
 					O nome de usuário e/ou e-mail que você está tentando
 					utilizar já está cadastrado no sistema. Por favor, tente
-					novamente como outro nome de usuário e/ou e-mail. Se o erro
-					persistir, entre em contato com a coordenação do Amamenta.
+					novamente como outro nome de usuário e/ou e-mail.
 				</div>
 			</c-modal-body>
 			<c-modal-footer>
@@ -468,7 +418,6 @@
 					style="font-size: 18px"
 				>
 					Ocorreu um erro no banco de dados ao tentar se cadastrar.
-					Por favor, entre em contato com a coordenação do Amamenta.
 				</div>
 			</c-modal-body>
 			<c-modal-footer>
@@ -498,9 +447,8 @@
 					style="font-size: 18px"
 				>
 					Seu cadastro foi realizado com sucesso. Porém, você ainda
-					não possui acesso ao sistema. É necessário que um
-					administrador libere o seu acesso. Se você precisa de acesso
-					imediato, entre em contato com a coordenação do Amamenta.
+					não possui acesso ao sistema. É necessário que você confirme
+					seu registro pelo e-mail.
 				</div>
 				<div
 					class="alert alert-danger"
@@ -508,8 +456,7 @@
 					style="font-size: 18px"
 				>
 					Erro ao enviar o e-mail com a confirmação de cadastro.
-					Provavelmente o serviço de e-mail está indisponível. Por
-					favor, entre em contato com a coordenação do Amamenta.
+					Provavelmente o serviço de e-mail está indisponível.
 				</div>
 			</c-modal-body>
 			<c-modal-footer>

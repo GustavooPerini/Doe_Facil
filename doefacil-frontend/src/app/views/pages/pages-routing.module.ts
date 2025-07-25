@@ -4,8 +4,6 @@ import { Page404Component } from "./page404/page404.component";
 import { Page500Component } from "./page500/page500.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
-import { TermsComponent } from "./terms/terms.component";
-import { PolicyComponent } from "./policy/policy.component";
 
 const routes: Routes = [
 	{
@@ -34,20 +32,6 @@ const routes: Routes = [
 		component: RegisterComponent,
 		data: {
 			title: "Register Page",
-		},
-	},
-	{
-		path: "terms",
-		component: TermsComponent,
-		data: {
-			title: "Terms Page",
-		},
-	},
-	{
-		path: "policy",
-		component: PolicyComponent,
-		data: {
-			title: "Policy Page",
 		},
 	},
 ];

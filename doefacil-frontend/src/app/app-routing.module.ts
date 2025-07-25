@@ -7,8 +7,6 @@ import { Page404Component } from "./views/pages/page404/page404.component";
 import { Page500Component } from "./views/pages/page500/page500.component";
 import { LoginComponent } from "./views/pages/login/login.component";
 import { RegisterComponent } from "./views/pages/register/register.component";
-import { TermsComponent } from "./views/pages/terms/terms.component";
-import { PolicyComponent } from "./views/pages/policy/policy.component";
 
 const routes: Routes = [
 	{
@@ -89,20 +87,6 @@ const routes: Routes = [
 		component: RegisterComponent,
 		data: {
 			title: "Register Page",
-		},
-	},
-	{
-		path: "terms",
-		component: TermsComponent,
-		data: {
-			title: "Terms Page",
-		},
-	},
-	{
-		path: "policy",
-		component: PolicyComponent,
-		data: {
-			title: "Policy Page",
 		},
 	},
 	{

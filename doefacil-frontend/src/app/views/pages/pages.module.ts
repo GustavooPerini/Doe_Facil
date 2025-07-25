@@ -12,8 +12,6 @@ import {
 	GridModule,
 } from "@coreui/angular";
 import { IconModule } from "@coreui/icons-angular";
-import { TermsComponent } from "./terms/terms.component";
-import { PolicyComponent } from "./policy/policy.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModalModule } from "@coreui/angular";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -24,8 +22,6 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 		RegisterComponent,
 		Page404Component,
 		Page500Component,
-		TermsComponent,
-		PolicyComponent,
 	],
 	imports: [
 		CommonModule,

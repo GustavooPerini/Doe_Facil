@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 
 import { ValidationFormsService } from "../../../services/validation-forms.service";
-import { UserService } from "src/app/services/user.service";
+import { UserService } from "../../../services/user.service";
 import { LoginService } from "./../../../services/login.service";
 
 import { cilBook } from "@coreui/icons";
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
 					this.toggleLoginError();
 				} else if (response.status == "user-not-allowed") {
 					this.loginErrorMessage =
-						"Você não possui permissão para acessar o sistema. Por favor, entre em contato com a coordenação do Amamenta.";
+						"Você não possui permissão para acessar o sistema. Confirme o seu cadastro pelo e-mail";
 					this.toggleLoginError();
 				} else if (response.status == "authentication-fail") {
 					this.loginErrorMessage =
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
 			error: (err) => {
 				this.toggleSpinnerVisible();
 				this.loginErrorMessage =
-					"Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde. Se o erro persistir, entre em contato com a coordenação do Amamenta";
+					"Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.";
 				this.toggleLoginError();
 			},
 		});
@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
 				else{
 					this.toggleRetrievePassword();
 					this.loginErrorMessage =
-						"Ocorreu um erro ao recuperar o e-mail, por favor entre em contato com a administração do PAD.";
+						"Ocorreu um erro ao recuperar o e-mail.";
 					this.toggleLoginError();
 				}
 			},
