@@ -1,0 +1,28 @@
+<form [formGroup]="profileForm">
+
+    <div>
+        <label for="firstName">Nome</label> <br>
+        <input type="text" id="firstName" formControlName="firstName"> <br>
+    </div>
+
+    <div>
+        <label for="lastName">Sobrenome</label> <br>
+        <input type="text" id="lastName" formControlName="lastName"> <br>
+    </div>
+        
+    <c-form-check>
+        <input cFormCheckInput id="default" type="radio" value="Gugu" name="flexRadioDefault" />
+        <label cFormCheckLabel for="default">Default radio</label>
+    </c-form-check>
+
+    <c-form-check>
+        <input cFormCheckInput id="checked" type="radio" value="Xandinho" name="flexRadioDefault" />
+        <label cFormCheckLabel for="checked">Checked radio</label>
+    </c-form-check>
+
+
+</form>
+
+
+
+

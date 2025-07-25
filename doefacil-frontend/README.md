@@ -1,27 +1,36 @@
-# Frontend
+# Amamenta Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+O frontend do Amamenta é desenvolvido em Angular utilizando um template gratuito da [CoreUI](https://coreui.io/angular/). O tutorial para criar o ambiente de desenvolvimento usando docker [está descrito neste arquivo](https://github.com/pad-ufes/dockerfiles/tree/main/dev). As versões utilizadas são descritas a seguir:
 
-## Development server
+- Nodejs 16.19
+- Angular 15.1.1
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Para entender mais sobre o template utilizado como base, é interessante que você acesse ao [README](https://github.com/coreui/coreui-free-angular-admin-template) disponibilizado pelos desenvolvedores do mesmo.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Executando o frontend
 
-## Build
+Se você fez a instalação manual do Angular (**não recomendado**), é necessário instalar as depedências do projeto. Para isso, execute o comando `npm install` dentro da pasta do projeto. Se você está utilizando o ambiente criado dentro do Docker, não é necessário executar esse passo uma vez que isso é feito na criação da imagem. Sendo assim, todas as dependências serão baixadas. Lembrando que essas dependencias estão dentro do `.gitignore` e de maneira alguma devem ser versionadas (por isso usamos um gerenciador). 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Baixada as depêndencias, você pode servir apenas o frontend utilizando o comando `ng serve`, que por padrão, vai servir o projeto no endereço `localhost:4200`. Todavia, ao executar o servidor via Maven, o mesmo já copia a build do Angular e serve no `localhost:8080`.
 
-## Running unit tests
+Para melhor entender a integração entre o servidor e o frontend, dirija-se ao [repositório de documentação](https://github.com/pad-ufes/docs).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Para aumentar sua produção
+Um editor adequado para o uso do Angular é o [VScode](https://code.visualstudio.com/). Ele funciona tanto para Windows quanto para Linux.
+É altamente recomendável que o instale e utilize os pacotes `Angular Extension Pack` (criado pela Loiane Groner) e `VSCode simpler Icons with Angular`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Documentaçao
+A documentação do código Angular será realizado utilizando o [Compodoc](https://compodoc.app/guides/getting-started.html). O funcionamento dele é idêntico ao Javadoc e todas as informações necessárias são descritas em seu site. Para mais informações, dirija-se ao [repositório de documentação](https://github.com/pad-ufes/docs).
 
-## Further help
+Além disso, o CoreUI fornece uma documentação interessante para as funcionalidades disponíveis no template. Alguns links úteis para desenvolver no frontend:
+- [Documentação do CoreUI](https://coreui.io/angular/docs/getting-started/introduction): aqui você pode acessar o componente desejado, visualizar como ele funciona e ver um trecho de código da sua implementação
+- [Live preview do CoreUI](https://coreui.io/demos/angular/4.2/free/#/dashboard): aqui é possível visualizar uma demostração de todos os componentes que o CoreUI fornece para que possamos desenvolver nosso sistema. É muito interessante utilizar para entender alguma funcionalidade ou se inspirar para construir algum item de uma página. Por exemplo, você pode visualizar como funciona uma tabela e depois implementar dentro do Amamenta
+- [Código do live preview CoreUI](https://github.com/coreui/coreui-free-angular-admin-template): aqui você pode acessar o código fonte do live preview do CoreUI. É interessante ter na sua máquina para entender como um dado item funciona e transferir ele para o Amamenta
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Mais informações
+* [Nodejs](https://nodejs.org/en/)
+* [NPM](https://docs.npmjs.com/cli/install)
+* [Angular](https://angular.io/)
+* [CoreUI](https://coreui.io/angular/)

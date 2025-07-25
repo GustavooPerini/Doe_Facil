@@ -1,0 +1,31 @@
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { URL_API } from "../utils/url-api";
+
+@Injectable({
+	providedIn: "root",
+})
+export class CityBrazilService {
+	constructor(private http: HttpClient) { }
+
+	/**
+	 * @author Eduarda Magesk
+	 * Method to search for brazilian cities names that contains the name
+	 * @param name the string needs to be the same as on the database
+	 */
+	public findByNameContainingIgnoreCase(name: string): Observable<any> {
+		return this.http
+			.get(
+				`${URL_API}/api/city-brazil/search/findByNameContainingIgnoreCase?name=${name}`
+			)
+			.pipe(
+				map((resp: any) =>
+					resp["_embedded"]["city-brazil"].map(
+						(pro: { name: any }) => pro.name
+					).slice(0, 8)
+				)
+			);
+	}
+}

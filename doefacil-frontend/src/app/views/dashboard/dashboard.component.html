@@ -1,0 +1,14 @@
+<div *ngIf="loggedUser != undefined">
+	<c-row class="align-itens-center">
+		<c-col>
+			<app-widgets-general [loggedUser]="loggedUser">
+			</app-widgets-general>
+		</c-col>
+	</c-row>
+	<!-- <c-row>
+		<c-col>
+			<app-recent-activities [loggedUser]="loggedUser">
+			</app-recent-activities>
+		</c-col>
+	</c-row> -->
+</div>

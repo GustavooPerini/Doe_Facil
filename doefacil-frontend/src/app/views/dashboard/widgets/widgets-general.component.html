@@ -1,0 +1,46 @@
+<div>
+	<!-- SE FOR QUALQUER OUTRA ROLE, VAI VER ESSES WIDGETS -->
+	<div
+		*ngIf="
+			loggedUser.role == 'USER' ||
+			loggedUser.role == 'ADMIN' ||
+			loggedUser.role == 'SUPER' 
+		"
+	>
+		<c-row class="align-itens-center" [lg]="2" [md]="2" [sm]="2">
+			<c-col lg="6" xs="12">
+				<c-widget-stat-f
+					[title]="'Mulheres cadastradas'"
+					class="mb-3"
+					color="success"
+					padding
+					[value]="100"
+				>
+					<ng-template cTemplateId="widgetIconTemplate">
+						<fa-icon
+							[icon]="icons.faUsers"
+							class="fa-lg pad-btn"
+						></fa-icon>
+					</ng-template>
+				</c-widget-stat-f>
+			</c-col>
+
+			<c-col lg="6" xs="12">
+				<c-widget-stat-f
+					[title]="'Agendamentos de coleta'"
+					class="mb-3"
+					color="info"
+					padding
+					[value]="7"
+				>
+					<ng-template cTemplateId="widgetIconTemplate">
+						<fa-icon
+							[icon]="icons.faUserDoctor"
+							class="fa-lg pad-btn"
+						></fa-icon>
+					</ng-template>
+				</c-widget-stat-f>
+			</c-col>
+		</c-row>
+	</div>
+</div>

@@ -1,0 +1,326 @@
+<c-card>
+    <c-card-header>
+        <svg [cIcon]="icons.cilUserFemale" size="lg" title="Woman Icon"></svg>
+        <strong> &nbsp; Cadastro da Criança</strong>
+    </c-card-header>
+
+    <c-card-body>
+        <form cForm novalidate (ngSubmit)="onSubmit()" [formGroup]="liveForm">
+
+            <c-container>
+                <c-row>
+                    <c-col [md]="5" *ngIf="liveForm.controls['name'] as ctrl">
+                        <label cLabel for="name">Nome Completo da Criança</label>
+                        <input
+                            id="name"
+                            type="text"
+                            cFormControl 
+                            formControlName="name"
+                            [autofocus]="true"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O nome completo da criança é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="3" *ngIf="liveForm.controls['birthDate'] as ctrl">
+                        <label cLabel for="birthDate">Data de Nascimento</label>
+                        <input
+                            id="birthDate"
+                            cFormControl 
+                            type="date"
+                            formControlName="birthDate"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            A data de nascimento é obrigatória!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="2" *ngIf="liveForm.controls['gender'] as ctrl">
+                        <label cLabel for="gender">Sexo da criança</label>
+                        <select
+                            id="gender"
+                            cSelect
+                            cFormControl
+                            formControlName="gender"
+                            [valid]="isValid(ctrl)"
+                        >
+                            <option *ngFor="let gender of (ChildGenders | keyvalue)" [value]="gender.key">
+                                {{ gender.value }}
+                            </option>
+                        </select>
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            Selecione o sexo da criança!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="2" *ngIf="liveForm.controls['race'] as ctrl">
+                        <label cLabel for="race">Raça / Cor</label>
+                        <select
+                            id="race"
+                            cSelect
+                            cFormControl
+                            formControlName="race"
+                            [valid]="isValid(ctrl)"
+                        >
+                            <option *ngFor="let race of (ChildRaces | keyvalue)" [value]="race.key">
+                                {{ race.value }}
+                            </option>
+                        </select>
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            Selecione raça/cor da criança!
+                        </c-form-feedback>
+                    </c-col>
+                </c-row>
+
+                <br /> <br />
+
+                <c-row>
+                    <c-col [md]="3" *ngIf="liveForm.controls['birthWeight'] as ctrl">
+                        <label for="birthWeigth">Peso ao nascer (em gramas)</label>
+                        <input 
+                            id="birthWeight"
+                            type="number"
+                            min="0"
+                            placeholder="0.00"
+                            cFormControl
+                            formControlName="birthWeight"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O peso ao nascer é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="3" *ngIf="liveForm.controls['dischargeWeight'] as ctrl">
+                        <label for="dischargeWeight">Peso de alta (em gramas)</label>
+                        <input 
+                            id="dischargeWeight"
+                            type="number"
+                            min="0"
+                            placeholder="0.00"
+                            cFormControl
+                            formControlName="dischargeWeight"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O peso de alta é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="3" *ngIf="liveForm.controls['dischargeDate'] as ctrl">
+                        <label for="dischargeDate">Data da alta</label>
+                        <input 
+                            id="dischargeDate"    
+                            type="date"
+                            cFormControl
+                            formControlName="dischargeDate"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            A data de alta é obrigatória!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col *ngIf="liveForm.controls['currentWeight'] as ctrl">
+                        <label for="currentWeight">Peso Atual (em gramas)</label>
+                        <input
+                            id="currentWeight" 
+                            type="number"
+                            min="0"
+                            placeholder="0.00"
+                            cFormControl
+                            formControlName="currentWeight"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O peso atual é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+                </c-row>
+
+                <br /> <br />
+
+                <c-row>
+                    <c-col [md]="3" *ngIf="liveForm.controls['childLength'] as ctrl">
+                        <label for="childLength">Comprimento da criança</label>
+                        <input
+                            id="childLength" 
+                            type="number"
+                            min="0"
+                            placeholder="0.00"
+                            cFormControl
+                            formControlName="childLength"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O comprimento da criança é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="3" *ngIf="liveForm.controls['headCircumference'] as ctrl">
+                        <label for="headCircumference">Perímetro Cefálico</label>
+                        <input
+                            id="headCircumference" 
+                            type="number"
+                            min="0"
+                            placeholder="0.00"
+                            cFormControl
+                            formControlName="headCircumference"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O perímetro cefálico da criança é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="5" *ngIf="liveForm.controls['apgarScore'] as ctrl">
+                        <label for="apgarScore">Índice de Apgar</label>
+                        <input
+                            id="apgarScore" 
+                            type="text"
+                            cFormControl
+                            formControlName="apgarScore"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O índice de apgar é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+                </c-row>
+
+                <br /> <br />
+
+                <c-row>
+                    <c-col [md]="5" *ngIf="liveForm.controls['birthPlace'] as ctrl">
+                        <label for="birthPlace">Local da Ocorrência do Parto</label>
+                        <select 
+                            id="birthPlace"
+                            cSelect
+                            cFormControl
+                            formControlName="birthPlace"
+                            [valid]="isValid(ctrl)"
+                        >
+                            <option *ngFor="let place of (BirthPlaces | keyvalue)" [value]="place.key">
+                                {{ place.value }}
+                            </option>
+                        </select>
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O local de ocorrência do parto é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="3" *ngIf="liveForm.controls['birthInstitution'] as ctrl">
+                        <label for="birthInstitution">Instituição do Nascimento</label>
+                        <input 
+                            id="birthInstitution"
+                            type="text"
+                            cFormControl
+                            formControlName="birthInstitution"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            A instituição de nascimento é obrigatória!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="3" *ngIf="liveForm.controls['hospitalized'] as ctrl">
+                        <label for="hospitalized">Internado ou Domicílio</label>
+                        <input
+                            id="hospitalized" 
+                            type="text"
+                            cFormControl
+                            formControlName="hospitalized"
+                            [valid]="isValid(ctrl)"
+                        >
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            Este campo é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+                </c-row>
+
+                <br /> <br />
+
+                <div class="d-grid gap-2 d-flex justify-content-end">
+                    <button
+                        cButton
+                        type="submit"
+                        class="btn btn-success btn-block pad-btn"
+                    >
+                        <fa-icon
+                            [icon]="iconsFa.faCirclePlus"
+                            class="cardIcon fa-lg fa-fw"
+                        >
+                        </fa-icon>
+                        &nbsp; Cadastrar
+                    </button>
+                </div>
+
+            </c-container>
+
+        </form>
+    </c-card-body>
+
+    <c-modal
+        id="successModal"
+        [visible]="successVisible"
+        (visibleChange)="handleSuccessModalChange($event)"
+    >
+        <c-modal-header>
+			<h5 cModalTitle>Sucesso</h5>
+			<button (click)="toggleSuccessModal()" cButtonClose></button>
+		</c-modal-header>
+		<c-modal-body>
+			<div
+				class="alert alert-success"
+				role="alert"
+				style="font-size: 18px"
+			>
+				Criança cadastrada com sucesso.
+			</div>
+		</c-modal-body>
+		<c-modal-footer>
+			<button
+				class="pad-btn"
+				(click)="toggleSuccessModal()"
+				cButton
+				color="success"
+			>
+				Fechar
+			</button>
+		</c-modal-footer>
+    </c-modal>
+
+    <c-modal
+		id="errorModal"
+		[visible]="errorVisible"
+		(visibleChange)="handleErrorModalChange($event)"
+	>
+		<c-modal-header>
+			<h5 cModalTitle>Ocorreu um erro</h5>
+			<button (click)="toggleErrorModal()" cButtonClose></button>
+		</c-modal-header>
+		<c-modal-body>
+			<div
+				class="alert alert-danger"
+				role="alert"
+				style="font-size: 18px"
+			>
+                Ocorreu um erro ao realizar o cadastro.
+			</div>
+		</c-modal-body>
+		<c-modal-footer>
+			<button
+				class="pad-btn"
+				(click)="toggleErrorModal()"
+				cButton
+				color="danger"
+			>
+				Fechar
+			</button>
+		</c-modal-footer>
+	</c-modal>
+
+</c-card>
