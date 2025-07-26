@@ -1,10 +1,15 @@
 package com.projeto.doe_facil.model;
 
+import com.projeto.doe_facil.utils.enums.ConservationStatus;
+import com.projeto.doe_facil.utils.enums.ItemCategory;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,13 +30,15 @@ public class ItemModel {
     private String description;
 
     @Column(nullable = false)
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private ItemCategory category;
 
     @Column(nullable = false)
     private String imageSrc;
 
     @Column(nullable = false)
-    private String conservationStatus;
+    @Enumerated(EnumType.STRING)
+    private ConservationStatus conservationStatus;
 
     @Embedded
     @AttributeOverrides({
@@ -77,11 +84,11 @@ public class ItemModel {
         this.description = description;
     }
 
-    public String getCategory() {
+    public ItemCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ItemCategory category) {
         this.category = category;
     }
 
@@ -93,11 +100,11 @@ public class ItemModel {
         this.imageSrc = imageSrc;
     }
 
-    public String getConservationStatus() {
+    public ConservationStatus getConservationStatus() {
         return conservationStatus;
     }
 
-    public void setConservationStatus(String conservationStatus) {
+    public void setConservationStatus(ConservationStatus conservationStatus) {
         this.conservationStatus = conservationStatus;
     }
 
