@@ -20,11 +20,6 @@ export class AutocompleteService {
 		private cityBrazilService: CityBrazilService,
 	) { }
 
-	/**
-	 * @author Eduarda Magesk
-	 * Method to autocomplete professions names using he term passed as a
-	 * paramether. Must be used on inputs with [ngbTypeahead] from ng-bootstrap
-	 */
 	public completeProfession = (nome: Observable<string>) => {
 		return nome.pipe(
 			debounceTime(400),
@@ -35,11 +30,6 @@ export class AutocompleteService {
 		);
 	};
 
-	/**
-	 * @author Eduarda Magesk
-	 * Method to autocomplete brazilian states names using he term passed as a
-	 * paramether. Must be used on inputs with [ngbTypeahead] from ng-bootstrap
-	 */
 	public completeStateBrazil = (nome: Observable<string>) => {
 		return nome.pipe(
 			debounceTime(400),
@@ -50,11 +40,6 @@ export class AutocompleteService {
 		);
 	};
 
-	/**
-	 * @author Eduarda Magesk
-	 * Method to autocomplete brazilian cities names using he term passed as a
-	 * paramether. Must be used on inputs with [ngbTypeahead] from ng-bootstrap
-	 */
 	public completeCityBrazil =  (nome: Observable<string>) => {
 
 		return nome.pipe(
@@ -64,13 +49,5 @@ export class AutocompleteService {
 				this.cityBrazilService.findByNameContainingIgnoreCase(term)
 			)
 		);
-
-		// return combineLatest([stateId, nome]).pipe(
-		// 	debounceTime(400),
-		// 	distinctUntilChanged(),
-		// 	switchMap(([state, name]) => 
-		// 		this.cityBrazilService.findByStateBrazilIdAndNameContainingIgnoreCase(state, name)
-		// 	)
-		// );
 	};
 }

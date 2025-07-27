@@ -45,22 +45,11 @@ export class UserViewerComponent implements OnInit {
 		this.getUsersByName(this.currentPage);
 	}
 
-	/**
-	 * @author Gabryel Batista
-	 * Método para mudar de página na tabela de usuários
-	 * @param event Captura o evento de mudança de página
-	 *
-	 */
 	public pageChange(event: PageChangedEvent): void {
 		this.currentPage = event.page;
 		this.getUsersByName(this.currentPage);
 	}
 
-	/**
-	 * @author Gabryel Batista
-	 * Método para alterar o acesso de um usuário ao sistema
-	 * @param user Um objeto com os dados do usuário a ser alterado
-	 */
 	public changeUserAccess(): void {
 		this.modalLoadingFlag = true;
 		this.selectedUser.allowed = !this.selectedUser.allowed;
@@ -83,12 +72,6 @@ export class UserViewerComponent implements OnInit {
 			});
 	}
 
-	/**
-	 * @author Andre Pacheco
-	 * Método para selecionar um usuário para ser editado
-	 * @param user Objeto com os dados do usuário a ser editado
-	 * @returns void
-	 */
 	public setSelectedUser(user: any): void {
 		this.selectedUser = user;
 		this.flagModalEdit = true;
@@ -101,11 +84,6 @@ export class UserViewerComponent implements OnInit {
 		this.flagModalEdit = false;
 	}
 
-	/**
-	 * @author Gabryel Batista (modificado por André Pacheco)
-	 * Método para alterar a role de um usuário no sistema
-	 * @param user Um objeto com os dados do usuário a ser alterado
-	 */
 	public changeUserRole(): void {
 		this.modalLoadingFlag = true;
 		this.userService
@@ -126,11 +104,6 @@ export class UserViewerComponent implements OnInit {
 			});
 	}
 
-	/**
-	 * @author Gabryel Batista (modificado por André Pacheco)
-	 * Método para deletar um usuário do sistema
-	 * @param user Obeto com os dados do usuário a ser deletado
-	 */
 	public deleteUser(user: any): void {
 		this.modalLoadingFlag = true;
 		this.alterationResp = "user-deleted";
@@ -147,11 +120,6 @@ export class UserViewerComponent implements OnInit {
 		});
 	}
 
-	/**
-	 * @author Eduarda Magesk
-	 * Method to get all users found by name
-	 * @param page 
-	 */
 	public getUsersByName(page: number) {
 		this.modalLoadingFlag = true;
 		console.log(this.userSettingsForm.value);
@@ -170,10 +138,6 @@ export class UserViewerComponent implements OnInit {
 
 	}
 
-	/**
-	 * @author Eduarda Magesk
-	 * Method to search users by name
-	 */
 	public searchUsersByName() {
 		this.getUsersByName(this.currentPage);
 	}

@@ -20,11 +20,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
 	) {
 		super();
 	}
-
-	/**
-	 * Método que realiza o logout do usuário
-	 * @author Andre Pacheco
-	 */
+	
 	public logout(): void {
 		this.loginService.logout().subscribe({
 			next: (resp) => {

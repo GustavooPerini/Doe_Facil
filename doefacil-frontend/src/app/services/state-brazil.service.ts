@@ -10,11 +10,6 @@ import { URL_API } from "../utils/url-api";
 export class StateBrazilService {
 	constructor(private http: HttpClient) { }
 
-	/**
-	 * @author Eduarda Magesk
-	 * Method to search for brazilian states names that contains the name
-	 * @param name the string needs to be the same as on the database
-	 */
 	public findByNameContainingIgnoreCase(name: string): Observable<any> {
 		return this.http
 			.get(

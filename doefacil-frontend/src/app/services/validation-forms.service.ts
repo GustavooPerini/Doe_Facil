@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 @Injectable({
 	providedIn: "root",
 })
-// @author Gabriel Schettino
+
 // Importado do CoreUI, apenas traduzido
 export class ValidationFormsService {
 	errorMessages: any;
