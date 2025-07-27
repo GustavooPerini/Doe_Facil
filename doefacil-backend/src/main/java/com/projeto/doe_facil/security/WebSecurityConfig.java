@@ -14,13 +14,26 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Classe que habilita e configura o Spring Security.
+ * @author Gustavo Perini.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
     
+    /**
+     * Serviço para o filtro de segurança.
+     */
     @Autowired
     SecurityFilter securityFilter;
 
+    /**
+     * Método que configura a cadeia de filtros de segurança.
+     * @param http Parâmetro padrão do Spring Security.
+     * @return Uma cadeia de filtros de segurança configurada.
+     * @throws Exception Uma exceção caso algo dê errado na configuração.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http

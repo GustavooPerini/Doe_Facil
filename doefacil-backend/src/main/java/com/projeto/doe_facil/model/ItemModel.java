@@ -3,10 +3,7 @@ package com.projeto.doe_facil.model;
 import com.projeto.doe_facil.utils.enums.ConservationStatus;
 import com.projeto.doe_facil.utils.enums.ItemCategory;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -16,46 +13,109 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+/**
+ * Classe que representa a entidade de um item que será cadastrado no sistema.
+ * @author Gustavo Perini.
+ */
 @Entity
 public class ItemModel {
     
+    /**
+     * Id que será gerado e salvo no banco. 
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Título do anúncio.
+     */
     @Column(nullable = false)
     private String title;
 
+    /**
+     * Descrição do anúncio.
+     */
     @Column(nullable = false)
     private String description;
 
+    /**
+     * Categoria do item anunciado.
+     */
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ItemCategory category;
 
+    /**
+     * Caminho de onde está salva a imagem do item.
+     */
     @Column(nullable = false)
     private String imageSrc;
 
+    /**
+     * Estado de conservação do item.
+     */
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ConservationStatus conservationStatus;
 
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "street", column = @Column(nullable = false)),
-        @AttributeOverride(name = "hoseNumber", column = @Column(nullable = false)),
-        @AttributeOverride(name = "addInfo", column = @Column(nullable = true)),
-        @AttributeOverride(name = "neighborhood", column = @Column(nullable = false)),
-        @AttributeOverride(name = "city", column = @Column(nullable = false)),
-        @AttributeOverride(name = "state", column = @Column(nullable = false)),
-        @AttributeOverride(name = "refPoint", column = @Column(nullable = true)),
-        @AttributeOverride(name = "cep", column = @Column(nullable = false))
-    })
-    private Location location;
+    /**
+     * Rua onde está localizado o item.
+     */
+    @Column(nullable = false)
+    private String street;
 
+    /**
+     * Número da casa onde está localizado o item.
+     */
+    @Column(nullable = false)
+    private String houseNumber;
+
+    /**
+     * Complemento do endereço onde está localizado o item.
+     */
+    @Column(nullable = true)
+    private String addInfo;
+
+    /**
+     * Bairro onde está localizado o item.
+     */
+    @Column(nullable = false)
+    private String neighborhood;
+
+    /**
+     * Cidade onde está localizado o item.
+     */
+    @Column(nullable = false)
+    private String city;
+
+    /**
+     * Estado onde está localizado o item.
+     */
+    @Column(nullable = false)
+    private String state;
+
+    /**
+     * Ponto de referência do endereço onde está localizado o item.
+     */
+    @Column(nullable = true)
+    private String refPoint;
+
+    /**
+     * Cep de onde está localizado o item.
+     */
+    @Column(nullable = false)
+    private String cep;
+
+    /**
+     * Indica se este item já foi doado ou não.
+     */
     @Column(nullable = false)
     private boolean donated;
 
+    /**
+     * Indica quem é o dono deste item.
+     */
     @ManyToOne
     @JoinColumn(name = "owner")
     private UserModel owner;
@@ -108,12 +168,68 @@ public class ItemModel {
         this.conservationStatus = conservationStatus;
     }
 
-    public Location getLocation() {
-        return location;
+    public String getStreet() {
+        return street;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public String getAddInfo() {
+        return addInfo;
+    }
+
+    public void setAddInfo(String addInfo) {
+        this.addInfo = addInfo;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getRefPoint() {
+        return refPoint;
+    }
+
+    public void setRefPoint(String refPoint) {
+        this.refPoint = refPoint;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public boolean isDonated() {

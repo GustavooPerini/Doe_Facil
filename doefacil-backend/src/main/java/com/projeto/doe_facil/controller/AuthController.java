@@ -21,19 +21,37 @@ import com.projeto.doe_facil.utils.enums.UserRole;
 
 import jakarta.validation.Valid;
 
+/**
+ * Controlador responsável pela autenticação(login) e cadastro de usuários.
+ * @author Gustavo Perini.
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
+    /**
+     * Serviço do Spring Security para faze a autenticação.
+     */
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    /**
+     * Serviço dos usuários.
+     */
     @Autowired
     private UserService userService;
 
+    /**
+     * Serviço de token.
+     */
     @Autowired
     private TokenService tokenService;
 
+    /**
+     * Método responsável pela realização de login de um usuário.
+     * @param data DTO com as informações de login.
+     * @return Um http response junto de um JWT token.
+     */
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody @Valid AuthenticationDTO data) {
         
@@ -45,6 +63,11 @@ public class AuthController {
         return ResponseEntity.ok(token);
     }
 
+    /**
+     * Método responsável pela realização de cadastro de um usuário.
+     * @param userDTO DTO com as informações de cadastro.
+     * @return Um http response junto do novo objeto criado.
+     */
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody @Valid UserDTO userDTO) {
 

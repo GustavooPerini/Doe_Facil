@@ -13,12 +13,24 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.projeto.doe_facil.model.UserModel;
 
+/**
+ * Serviço responsável por toda regra de negócio relacionado ao token.
+ * @author Gustavo Perini
+ */
 @Service
 public class TokenService {
     
+    /**
+     * Secret-key para gerar o token.
+     */
     @Value("${api.security.token.secret}")
     private String secret;
 
+    /**
+     * Método que gera um JWT token com base no login do usuário.
+     * @param user Um usário.
+     * @return O token gerado.
+     */
     public String generateToken(UserModel user) {
         try{
 
@@ -34,6 +46,11 @@ public class TokenService {
         }
     }
 
+    /**
+     * Verifica se um dado token é válido.
+     * @param token Um token.
+     * @return O subject (login do usuário) do token.
+     */
     public String validateToken(String token) {
         try {
 
@@ -49,6 +66,10 @@ public class TokenService {
         }
     }
 
+    /**
+     * Função auxiliar que gera o tempo de expiração do token.
+     * @return O tempo de expiração do token.
+     */
     private Instant genExpirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }

@@ -1,5 +1,9 @@
 package com.projeto.doe_facil.utils.enums;
 
+/**
+ * Enum que classifica a categoria do item.
+ * @author Gustavo Perini.
+ */
 public enum ItemCategory {
     CLOTHING_ACCESSORIES,
     FOOTWEAR,

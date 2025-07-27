@@ -18,30 +18,57 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
+/**
+ * Classe que representa a entidade de um usuário que será cadastrado no sistema.
+ * Ela implementa a interface UserDetails do Spring Security para conseguir fazer a autenticação e autorização de um usuário no login.
+ * @author Gustavo Perini.
+ */
 @Entity
 @Table(name = "users")
 public class UserModel implements UserDetails{
 
+    /**
+     * Id que será gerado e salvo no banco.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Nome que o usuário terá no sistema.
+     */
     @Column(nullable = false)
     private String userName;
 
+    /**
+     * Login para ter acesso ao sistema.
+     */
     @Column(nullable = false)
     private String login;
 
+    /**
+     * Senha para ter acesso ao sistema.
+     */
     @Column(nullable = false)
     private String password;
 
+    /**
+     * E-mail do usuário
+     */
     @Column(nullable = false)
     private String email;
 
+    /**
+     * Permissões de um usuário
+     */
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    /**
+     * Indica se o usuário tem acesso ou não ao sistema.
+     */
     @Column(nullable = false)
     private boolean allowed;
 
