@@ -51,14 +51,6 @@ const routes: Routes = [
 					),
 				canActivate: [UserAccessGuard],
 			},
-			{
-				path: "atendimento",
-				loadChildren: () => 
-					import("./views/appointment/appointment.module").then(
-						(m) => m.AppointmentModule
-					),
-				canActivate: [UserAccessGuard]
-			}
 		],
 	},
 	{

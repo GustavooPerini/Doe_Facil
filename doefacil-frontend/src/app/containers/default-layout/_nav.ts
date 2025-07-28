@@ -62,14 +62,21 @@ export const navItems: INavData[] = [
 		],
 	},
 	{
-		name: "Atendimento",
-		url: "dashboard/atendimento",
-		iconComponent: { name: "cilUser" },
+		name: "Item",
+		url:"dashboard/item",
+		iconComponent: { name: "cilAddressBook" },
 		children: [
 			{
-				name: "Histórico da Mulher",
-				url: "/dashboard/atendimento/historico/mulher",
-				iconComponent: { name: "" }
+				name: "Anúnciar Item",
+				url:"/dashboard/item/novo",
+			},
+			{
+				name: "Itens Anunciados",
+				url:"/dashboard/item/itens_anunciados",
+			},
+			{
+				name: "Itens Recebidos",
+				url:"/dashboard/item/meus_itens",
 			},
 		]
 	}
