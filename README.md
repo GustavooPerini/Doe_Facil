@@ -63,4 +63,4 @@ Feito isso, você ganha acesso a um terminal que está rodando dentro do contain
 
 ## Diagrama de Classes
 
-![Diagrama de Classes](doefacil-frontend\src\assets\Flowchart.png)
+![Diagrama de Classes](doefacil-frontend/src/assets/Flowchart.png)
