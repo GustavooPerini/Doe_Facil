@@ -20,7 +20,7 @@ Repositório voltado para o desenvolvimento do sistema web que será avaliado na
 - **Java JWT**: Biblioteca usada para gerar, assinar e validar tokens JWT (JSON Web Token), garantindo a segurança nas requisições autenticadas.
 
 
-# Como executar o sistema
+## Como executar o sistema
 
 Este tutorial ensina como executar a aplicação do Doe Fácil utilizando Docker. 
 
@@ -50,14 +50,14 @@ Breve descrição de cada container:
 - `doefacil-phpmyadmin`: container com a imagem do PHPMyAdmin. Ele já se conecta com o banco de dados automaticamente.
 - `doefacil-backfront`: este é o container de desenvolvimento do Doe Fácil. Veja a próxima seção para mais instruções de como usar.
 
-## Utilizando o PHPMyAdmin
+### Utilizando o PHPMyAdmin
 
 O PHPMyAdmin pode ser acessado na sua máquina utilizando o endereço `localhost:8888`. O login padrão é `root` e a senha padrão também é `root`.
 
 Nele você vai encontrar o banco de dados de nome doefacil. Você pode realizar consultas, remoção, adicionar dados, etc. Para um tutorial de como usar o PHPMyAdmin [assista este vídeo](https://www.youtube.com/watch?v=kviT7G14gqk).
 
 
-## Utilizando o container de desenvolvimento
+### Utilizando o container de desenvolvimento
 
 O container `doefacil-backfront` contém tudo que é necessário para executar o frontend e o backend. A ideia é que você acesse-o com o comando:
 
@@ -76,7 +76,13 @@ Feito isso, você ganha acesso a um terminal que está rodando dentro do contain
   - Agora abra o diretório `/app/doefacil-backend/` e execute o comando `mvn spring-boot:run`. Esse comando vai servir o backend no endereço `localhost:8080`
   - Além disso, é necessário que seja seja criado o arquivo application.properties. Ele é um arquivo de configurações importante para algumas dependências do Spring. Crie um diretório chamado resources em `/doefacil-backend/src/main/`. Dentro desse novo diretório crie o arquivo `application.properties`. Para um ambiente de teste, o arquivo pode ter o seguinte conteúdo:
   ```
-    
+    spring.datasource.url=jdbc:mysql://doefacil-mysql:3306/doefacil
+    spring.datasource.username=root
+    spring.datasource.password=root
+    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+    spring.jpa.hibernate.ddl-auto=update
+    spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+    api.security.token.secret=umSegredoBemForteAqui123
   ```
 
 ## Como Gerar a Documentação da API
