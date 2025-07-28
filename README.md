@@ -2,7 +2,7 @@
 Repositório voltado para o desenvolvimento do sistema web que será avaliado na disciplina Projeto Integrado
 
 
-## 🛠️ Ferramentas Utilizadas
+## Ferramentas Utilizadas
 
 - **Git / GitHub**: Controle de versionamento e hospedagem do código-fonte.
 - **Maven**: Gerenciador de dependências e ferramenta de build para o backend Java.
