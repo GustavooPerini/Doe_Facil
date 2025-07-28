@@ -59,3 +59,8 @@ Feito isso, você ganha acesso a um terminal que está rodando dentro do contain
 - Executar o backend
   - Agora abra o diretório `/app/doefacil-backend/` e execute o comando `mvn spring-boot:run`. Esse comando vai servir o backend no endereço `localhost:8080`
   - Além disso, é necessário que seja seja criado o arquivo application.properties. Ele é importante para fazer a conexão com o banco de dados informando os dados necessários. Crie um diretório chamado resources em `/app/doefacil-backend/src/main/`. Dentro desse novo diretório crie o arquivo `application.properties`.
+
+
+## Diagrama de Classes
+
+![Diagrama de Classes](doefacil-frontend\src\assets\Flowchart.png)
