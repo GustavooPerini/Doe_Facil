@@ -9,6 +9,16 @@ Repositório voltado para o desenvolvimento do sistema web que será avaliado na
 - **npm**: Gerenciador de pacotes e ferramenta de build para o frontend JavaScript.
 - **Docker**: Plataforma para criação, execução e gerenciamento de contêineres, facilitando a inicialização e o empacotamento da aplicação.
 
+## Frameworks Reutilizados
+
+- **Angular 18**: Framework frontend para criação de interfaces dinâmicas e componentes reutilizáveis em aplicações single-page (SPA).
+- **CoreUI**: Biblioteca de componentes visuais compatível com Angular, utilizada para acelerar o desenvolvimento da interface.
+- **Spring Boot**: Framework Java que simplifica a criação de aplicações backend robustas, com configuração mínima.
+- **Spring Data JPA**: Abstração sobre o JPA que facilita a integração com bancos de dados relacionais, eliminando a necessidade de escrever queries SQL na maior parte dos casos.
+- **Spring Web**: Módulo do Spring Boot que fornece os recursos necessários para desenvolver APIs RESTful.
+- **Spring Security**: Solução completa de segurança para autenticação e autorização em aplicações Java.
+- **Java JWT**: Biblioteca usada para gerar, assinar e validar tokens JWT (JSON Web Token), garantindo a segurança nas requisições autenticadas.
+
 
 # Repositório de Dockerfiles de desenvolvimento
 
@@ -72,9 +82,9 @@ Feito isso, você ganha acesso a um terminal que está rodando dentro do contain
 
 ## Diagrama de Classes
 
-![Diagrama de Classes](doefacil-frontend/src/assets/Flowchart.png)
+![Diagrama de Classes](doefacil-frontend/src/assets/classes.png)
 
 
 ## Diagrama de Casos de Uso
 
-![Diagrama de Classes](doefacil-frontend/src/assets/UseCases.png)
+![Diagrama de Classes](doefacil-frontend/src/assets/usecases.png)
