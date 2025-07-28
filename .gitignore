@@ -12,6 +12,7 @@ target/
 tmp
 bazel-out
 .angular/cache
+doefacil-frontend/.angular/cache/
 .sass-cache/
 connect.lock
 coverage
