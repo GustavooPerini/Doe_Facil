@@ -20,9 +20,9 @@ Repositório voltado para o desenvolvimento do sistema web que será avaliado na
 - **Java JWT**: Biblioteca usada para gerar, assinar e validar tokens JWT (JSON Web Token), garantindo a segurança nas requisições autenticadas.
 
 
-# Repositório de Dockerfiles de desenvolvimento
+# Como executar o sistema
 
-Este tutorial ensina como configurar seu ambiente de desenvolvimento do Doe Fácil utilizando Docker. 
+Este tutorial ensina como executar a aplicação do Doe Fácil utilizando Docker. 
 
 **Passo 1:** Tenha o Docker instalado em sua máquina
 
@@ -32,10 +32,7 @@ Este tutorial ensina como configurar seu ambiente de desenvolvimento do Doe Fác
 docker compose up -d
 ```
 
-Esse comando vai buildar as imagens e criar todo ambiente de desenvolvimento. Isso pode levar algum tempo uma vez que será efetuado o download de uma série de imagens e todas as depedências do sistema.
-
-**Importante**: o build da imagem do `doefacil-backfront` pode levar algum tempo (+15min)
-
+Esse comando vai buildar as imagens e criar todo ambiente da aplicação. Isso pode levar algum tempo uma vez que será efetuado o download de uma série de imagens e todas as depedências do sistema.
 
 Quando tudo finalizar, se tudo deu certo, você deve ter 3 containers rodando na sua máquina. Ao executar o comando `docker ps` você deve encontrar os seguintes containers:
 
@@ -46,7 +43,7 @@ mysql             0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp          
 java_node         0.0.0.0:4200->4200/tcp, :::4200->4200/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   doefacil-backfront
 ```
 
-Se esses containers não estiverem ativos, algum problema ocorreu durante a construção das imagens. Tente fazer novamente. Se não conseguir, procure ajuda.
+Se esses containers não estiverem ativos, algum problema ocorreu durante a construção das imagens. Tente fazer novamente. Se não conseguir, contate um dos desenvolvedores.
 
 Breve descrição de cada container:
 - `doefacil-mysql`: container com a imagem do banco MySQL. 
@@ -62,7 +59,7 @@ Nele você vai encontrar o banco de dados de nome doefacil. Você pode realizar 
 
 ## Utilizando o container de desenvolvimento
 
-O container `doefacil-backfront` contém tudo que é necessário para executar o front e o backend. A ideia é que você acesse-o com o comando:
+O container `doefacil-backfront` contém tudo que é necessário para executar o frontend e o backend. A ideia é que você acesse-o com o comando:
 
 ```
 docker exec -ti doefacil-backfront /bin/bash
@@ -77,7 +74,10 @@ Feito isso, você ganha acesso a um terminal que está rodando dentro do contain
 
 - Executar o backend
   - Agora abra o diretório `/app/doefacil-backend/` e execute o comando `mvn spring-boot:run`. Esse comando vai servir o backend no endereço `localhost:8080`
-  - Além disso, é necessário que seja seja criado o arquivo application.properties. Ele é importante para fazer a conexão com o banco de dados informando os dados necessários. Crie um diretório chamado resources em `/app/doefacil-backend/src/main/`. Dentro desse novo diretório crie o arquivo `application.properties`.
+  - Além disso, é necessário que seja seja criado o arquivo application.properties. Ele é um arquivo de configurações importante para algumas dependências do Spring. Crie um diretório chamado resources em `/doefacil-backend/src/main/`. Dentro desse novo diretório crie o arquivo `application.properties`. Para um ambiente de teste, o arquivo pode ter o seguinte conteúdo:
+  ```
+    
+  ```
 
 ## Como Gerar a Documentação da API
 
