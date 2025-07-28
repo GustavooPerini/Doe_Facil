@@ -1,6 +1,15 @@
 # Doe_Facil
 Repositório voltado para o desenvolvimento do sistema web que será avaliado na disciplina Projeto Integrado
 
+
+## 🛠️ Ferramentas Utilizadas
+
+- **Git / GitHub**: Controle de versionamento e hospedagem do código-fonte.
+- **Maven**: Gerenciador de dependências e ferramenta de build para o backend Java.
+- **npm**: Gerenciador de pacotes e ferramenta de build para o frontend JavaScript.
+- **Docker**: Plataforma para criação, execução e gerenciamento de contêineres, facilitando a inicialização e o empacotamento da aplicação.
+
+
 # Repositório de Dockerfiles de desenvolvimento
 
 Este tutorial ensina como configurar seu ambiente de desenvolvimento do Doe Fácil utilizando Docker. 
@@ -64,3 +73,8 @@ Feito isso, você ganha acesso a um terminal que está rodando dentro do contain
 ## Diagrama de Classes
 
 ![Diagrama de Classes](doefacil-frontend/src/assets/Flowchart.png)
+
+
+## Diagrama de Casos de Uso
+
+![Diagrama de Classes](doefacil-frontend/src/assets/UseCases.png)
