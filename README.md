@@ -79,6 +79,29 @@ Feito isso, você ganha acesso a um terminal que está rodando dentro do contain
   - Agora abra o diretório `/app/doefacil-backend/` e execute o comando `mvn spring-boot:run`. Esse comando vai servir o backend no endereço `localhost:8080`
   - Além disso, é necessário que seja seja criado o arquivo application.properties. Ele é importante para fazer a conexão com o banco de dados informando os dados necessários. Crie um diretório chamado resources em `/app/doefacil-backend/src/main/`. Dentro desse novo diretório crie o arquivo `application.properties`.
 
+## Como Gerar a Documentação da API
+
+Para gerar a documentação do backend, siga os passos abaixo utilizando o Docker:
+
+1. **Inicie o container Docker:**
+   ```bash
+    docker start doefacil-backfront
+
+2. **Acesse o terminal do container:**
+    ```bash
+    docker exec -it doefacil-backfront bash
+
+3. **Navegue até o diretório do backend:**
+    ```bash
+    cd doefacil-backend/
+
+4. **Gere a documentação com o Maven:**
+    ```bash
+    mvn javadoc:javadoc
+
+A documentação será gerada no seguinte caminho: *target/site/apidocs/index.html*
+
+Você pode abrir esse arquivo no navegador para visualizar a documentação completa da API.
 
 ## Diagrama de Classes
 
