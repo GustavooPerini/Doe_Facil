@@ -40,7 +40,7 @@ Quando tudo finalizar, se tudo deu certo, você deve ter 3 containers rodando na
 IMAGE             PORTS                                                                                      NAMES
 phpmyadmin        0.0.0.0:8888->80/tcp, :::8888->80/tcp                                                  doefacil-phpmyadmin
 mysql             0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp                                   doefacil-mysql
-java_node         0.0.0.0:4200->4200/tcp, :::4200->4200/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   doefacil-backfront
+doefacil         0.0.0.0:4200->4200/tcp, :::4200->4200/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   doefacil-backfront
 ```
 
 Se esses containers não estiverem ativos, algum problema ocorreu durante a construção das imagens. Tente fazer novamente. Se não conseguir, contate um dos desenvolvedores.
@@ -85,6 +85,12 @@ Feito isso, você ganha acesso a um terminal que está rodando dentro do contain
     api.security.token.secret=umSegredoBemForteAqui123
   ```
 
+### Estado atual do sistema
+
+O sistema ainda está em desenvolvimento, entretanto já é possível realizar cadastro e login na plataforma. Para isso, basta inicializar o sistema de acordo com o que foi dito acima, acessar a url `localhost:4200`, clicar no botão de se cadastrar, preencher e submeter o formulário e, após a mensagem de confirmação de cadastro, voltar para a página de login e preencher com seus dados.
+
+Após efetuar o login com sucesso, você será encaminhado para a página principal da aplicação. Ressaltamos que essa seção ainda está em desenvolvimento e, por enquanto, não há conteúdo disponível.
+
 ## Como Gerar a Documentação da API
 
 Para gerar a documentação do backend, siga os passos abaixo utilizando o Docker:
@@ -113,7 +119,14 @@ Você pode abrir esse arquivo no navegador para visualizar a documentação comp
 
 ![Diagrama de Classes](doefacil-frontend/src/assets/classes.png)
 
+Esse diagrama descreve como as entidades são definidas e qual é a relação entre elas. Como pode ser visto, existem duas principais entidades. A primeira representa o usuário do sistema, este possui informações necessárias para o cadastro e um tipo USER ou ADMIN que dá a ele diferentes permissões. A outra entidade é o item que será anunciado na plataforma, suas informções são descrições daquele item como o título, uma breve descrição, imagem, localização e uma flag que indica se ele já foi doado ou não.
+
+A relação entre essas duas entidades se baseia em: um ou vários itens pussuem um usuário. Esse item que o usuário possui pode já ter sido doado (então o usuário recebeu o item) ou pode não ter sido doado (então o usuário anunciou o item). Um item deve sempre estar vinculado a um usuário.
 
 ## Diagrama de Casos de Uso
 
 ![Diagrama de Classes](doefacil-frontend/src/assets/usecases.png)
+
+Esse diagrama representa os métodos que cada tipo de usuário tem acesso. Os usuários do tipo USER podem listar, criar, editar e excluir seus próprios itens; listar e buscar todos os itens cadastrados no sistema; editar suas próprias informações.
+
+O ADMIN tem permissão para fazer tudo que um USER faz, além de poder gerenciar todos os usuários e anúncios.
