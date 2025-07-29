@@ -119,14 +119,14 @@ Você pode abrir esse arquivo no navegador para visualizar a documentação comp
 
 ![Diagrama de Classes](doefacil-frontend/src/assets/classes.png)
 
-Esse diagrama descreve como as entidades são definidas e qual é a relação entre elas. Como pode ser visto, existem duas principais entidades. A primeira representa o usuário do sistema, este possui informações necessárias para o cadastro e um tipo USER ou ADMIN que dá a ele diferentes permissões. A outra entidade é o item que será anunciado na plataforma, suas informções são descrições daquele item como o título, uma breve descrição, imagem, localização e uma flag que indica se ele já foi doado ou não.
+Esse diagrama descreve como as entidades são definidas e qual é a relação entre elas. Como pode ser visto, existem duas principais entidades. A primeira representa o usuário do sistema, este possui informações necessárias para o cadastro e um tipo USER ou ADMIN que dá a ele diferentes permissões. A outra entidade é o item que será anunciado na plataforma, suas informações são: título, uma breve descrição, imagem, localização, uma flag que indica se ele já foi doado ou não, estado de conservação e qual categoria ele se encaixa.
 
-A relação entre essas duas entidades se baseia em: um ou vários itens pussuem um usuário. Esse item que o usuário possui pode já ter sido doado (então o usuário recebeu o item) ou pode não ter sido doado (então o usuário anunciou o item). Um item deve sempre estar vinculado a um usuário.
+A relação entre essas duas entidades se baseia em: um ou vários itens estão ligados com um usuário. Esse item que o usuário possui pode ter a flag de doação marcada como true (isso indica que o usuário recebeu o item) ou pode ter ela marcada como false (isso indica que o usuário anunciou o item). Um item deve sempre estar vinculado a um usuário.
 
 ## Diagrama de Casos de Uso
 
 ![Diagrama de Classes](doefacil-frontend/src/assets/usecases.png)
 
-Esse diagrama representa os métodos que cada tipo de usuário tem acesso. Os usuários do tipo USER podem listar, criar, editar e excluir seus próprios itens; listar e buscar todos os itens cadastrados no sistema; editar suas próprias informações.
+Esse diagrama representa os métodos que cada tipo de usuário tem acesso. Os usuários do tipo USER podem listar, criar, editar e excluir seus próprios itens; listar e buscar todos os itens cadastrados no sistema; e, por fim, editar suas próprias informações.
 
 O ADMIN tem permissão para fazer tudo que um USER faz, além de poder gerenciar todos os usuários e anúncios.
