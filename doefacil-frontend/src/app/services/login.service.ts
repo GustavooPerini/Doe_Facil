@@ -9,12 +9,8 @@ import { Observable } from "rxjs";
 export class LoginService {
 	constructor(private http: HttpClient) {}
 
-	public loginAuth(userName: string, password: string): Observable<any> {
-		const credentials = new FormData();
-		credentials.append("username", userName);
-		credentials.append("password", password);
-
-		return this.http.post(`${URL_API}/login`, credentials);
+	public loginAuth(user: object): Observable<any> {
+		return this.http.post(`http://localhost:8080/auth/login`, user);
 	}
 
 	public logout(): Observable<any> {

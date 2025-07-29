@@ -317,14 +317,12 @@
 					role="alert"
 					style="font-size: 18px"
 				>
-					Seu cadastro foi realizado com sucesso. Porém, você ainda
-					não possui acesso ao sistema. É necessário que você confirme
-					seu registro pelo e-mail.
+					Seu cadastro foi realizado com sucesso.
 				</div>
 			</c-modal-body>
 			<c-modal-footer>
 				<button
-					(click)="toggleRegisterSuccess()"
+					(click)="confirmRegister()"
 					cButton
 					color="success"
 					class="pad-btn"

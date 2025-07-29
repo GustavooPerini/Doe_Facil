@@ -27,11 +27,11 @@ export const navItems: INavData[] = [
 		url: "dashboard/usuario",
 		iconComponent: { name: "cil-contact" },
 		children: [
-			{
-				name: "Adicionar",
-				url: "/dashboard/usuario/novo",
-				iconComponent: { name: "" },
-			},
+			// {
+			// 	name: "Adicionar",
+			// 	url: "/dashboard/usuario/novo",
+			// 	iconComponent: { name: "" },
+			// },
 			{
 				name: "Gerenciar",
 				url: "/dashboard/usuario/visualizar",
@@ -44,23 +44,23 @@ export const navItems: INavData[] = [
 			},
 		],
 	},
-	{
-		name: "Cadastrar",
-		url: "dashboard/cadastrar",
-		iconComponent: { name: "cilAddressBook" },
-		children: [
-			{
-				name: "Mulher",
-				url: "/dashboard/cadastrar/mulher",
-				iconComponent: { name: "" },
-			},
-			{
-				name: "Criança",
-				url: "/dashboard/cadastrar/criança",
-				iconComponent: { name: "" },
-			}
-		],
-	},
+	// {
+	// 	name: "Cadastrar",
+	// 	url: "dashboard/cadastrar",
+	// 	iconComponent: { name: "cilAddressBook" },
+	// 	children: [
+	// 		{
+	// 			name: "Mulher",
+	// 			url: "/dashboard/cadastrar/mulher",
+	// 			iconComponent: { name: "" },
+	// 		},
+	// 		{
+	// 			name: "Criança",
+	// 			url: "/dashboard/cadastrar/criança",
+	// 			iconComponent: { name: "" },
+	// 		}
+	// 	],
+	// },
 	{
 		name: "Item",
 		url:"dashboard/item",
@@ -76,7 +76,7 @@ export const navItems: INavData[] = [
 			},
 			{
 				name: "Itens Recebidos",
-				url:"/dashboard/item/meus_itens",
+				url:"/dashboard/item/itens_recebidos",
 			},
 		]
 	}

@@ -14,6 +14,7 @@ import { UserService } from "./../../../services/user.service";
 import { ValidationFormsService } from "../../../services/validation-forms.service";
 
 import User from "./../../../models/User";
+import AuthDTO from "../../../models/AuthDTO";
 
 /** passwords must match - custom validator */
 export class PasswordValidators {
@@ -42,7 +43,7 @@ export class RegisterComponent {
 
 	/**************************ICONS USED ******************************/
 
-    public user?: User;
+    public user?: AuthDTO;
     public registerForm!: FormGroup;
     public submitted = false;
     public formErrors: any;
@@ -130,40 +131,54 @@ export class RegisterComponent {
 
 			//atribuição dos valores do formulário para o modelo "user"
 
-            this.user = new User();
-            this.user.userName = this.registerForm.value.userName;
-            this.user.login = this.registerForm.value.login;
-            this.user.passwd = this.registerForm.value.password;
-            this.user.email = this.registerForm.value.email;
-            this.user.allowed = false;
-            this.user.role = "USER";
+            // this.user = new User();
+            // this.user.userName = this.registerForm.value.userName;
+            // this.user.login = this.registerForm.value.login;
+            // this.user.passwd = this.registerForm.value.password;
+            // this.user.email = this.registerForm.value.email;
+            // this.user.allowed = false;
+            // this.user.role = "USER";
             //  CHAMADA PARA O SERVIÇO DE CADASTRO DE USUÁRIO
+
+            this.user = new AuthDTO(this.registerForm.value);
 
             this.userService.userLoginRegister(this.user).subscribe({
                 next: (response) => {
                     console.log("resposta:", response);
-                    if (response.status === "registered") {
-                        this.toggleRegisterInProgressVisible();
-                        this.toggleRegisterSuccess();
-                        this.onReset();
-                    } else if (response.status === "not-allowed") {
-                        this.toggleRegisterInProgressVisible();
-                        this.toggleRegisterError();
-                    } else if (response.status === "db-problem") {
-                        this.toggleRegisterInProgressVisible();
-                        this.toggleDatabaseError();
-                    } else if (response.status === "lack-of-user-terms") {
-                        this.toggleRegisterInProgressVisible();
-                        this.toggleSendEmailError();
-                        this.onReset();
-                    } else if (response.status === "email-service-error") {
-                        this.toggleRegisterInProgressVisible();
-                        this.toggleSendEmailError();
-                        this.onReset();
-                    }
+                    this.toggleRegisterInProgressVisible();
+                    this.toggleRegisterSuccess();
+                    this.onReset();
+                    // if (response.status === "registered") {
+                    //     this.toggleRegisterInProgressVisible();
+                    //     this.toggleRegisterSuccess();
+                    //     this.onReset();
+                    // } else if (response.status === "not-allowed") {
+                    //     this.toggleRegisterInProgressVisible();
+                    //     this.toggleRegisterError();
+                    // } else if (response.status === "db-problem") {
+                    //     this.toggleRegisterInProgressVisible();
+                    //     this.toggleDatabaseError();
+                    // } else if (response.status === "lack-of-user-terms") {
+                    //     this.toggleRegisterInProgressVisible();
+                    //     this.toggleSendEmailError();
+                    //     this.onReset();
+                    // } else if (response.status === "email-service-error") {
+                    //     this.toggleRegisterInProgressVisible();
+                    //     this.toggleSendEmailError();
+                    //     this.onReset();
+                    // }
                 },
+                error: (err) => {
+                    alert(err.error);
+                    this.toggleRegisterInProgressVisible();
+                }
             });
         }
+    }
+
+    public confirmRegister() {
+        this.toggleRegisterSuccess();
+        this.router.navigate(["/"]);
     }
 
     public toggleRegisterSuccess() {

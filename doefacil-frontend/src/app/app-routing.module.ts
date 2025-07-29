@@ -51,6 +51,14 @@ const routes: Routes = [
 					),
 				canActivate: [UserAccessGuard],
 			},
+			{
+				path: "item",
+				loadChildren: () =>
+					import("./views/item/item.module").then(
+						(m) => m.ItemModule
+					),
+				canActivate: [UserAccessGuard]
+			}
 		],
 	},
 	{

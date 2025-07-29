@@ -1,6 +1,8 @@
 
-<c-card>
-	<!-- CASO A REQUISIÇÃO FALHE -->
+<p>Visualizar os usuários</p>
+
+<!-- <c-card>
+	CASO A REQUISIÇÃO FALHE 
 	<c-card-header *ngIf="failureFlag">
 		<svg cIcon name="cilWarning"></svg>
 		<strong> &nbsp; Falha de comunicação</strong>
@@ -13,7 +15,7 @@
 			os desenvolvedores
 		</p>
 	</c-card-body>
-	<!-- CASO A REQUISIÇÃO FALHE -->
+	 CASO A REQUISIÇÃO FALHE 
 
 	<c-card-header *ngIf="!failureFlag">
 		<c-icon name="cil-list"></c-icon>
@@ -24,7 +26,7 @@
 		<form cForm [formGroup]="userSettingsForm">
 			<c-row class="align-items-center">
 				<c-col lg="6" md="6" sm="6" xs="12">
-					<!-- <label cLabel cFormCheckLabel>Busca por nome do usuário:</label> -->
+					 <label cLabel cFormCheckLabel>Busca por nome do usuário:</label>  ---COMENTÁRIO AQUI
 					<div class="d-grid gap-2 d-flex justify-content-end">
 						<input
 							cFormControl
@@ -91,7 +93,7 @@
 						>
 					</td>
 					<td>
-						<!-- EDIÇAO DE USUARIO -->
+						EDIÇAO DE USUARIO 
 						<c-button-group>
 							<c-dropdown [autoClose]="'outside'">
 								<button
@@ -106,7 +108,7 @@
 							</c-dropdown>
 
 							<c-dropdown>
-								<!-- EXCLUSAO DE USUARIO  -->
+								 EXCLUSAO DE USUARIO  
 								<button
 									cButton
 									color="danger"
@@ -148,7 +150,7 @@
 								</div>
 							</c-dropdown>
 						</c-button-group>
-						<!-- EDIÇAO DE USUARIO -->
+						EDIÇAO DE USUARIO 
 					</td>
 				</tr>
 			</tbody>
@@ -262,7 +264,7 @@
 		</div>
 	</c-modal-footer>
 </c-modal>
-<!-- Modal para quando os dados estiverem sendo carregados -->
+ Modal para quando os dados estiverem sendo carregados 
 <c-modal backdrop="static" alignment="center" [visible]="modalLoadingFlag">
 	<c-modal-header>
 		<h5 cModalTitle>Carregando...</h5>
@@ -279,4 +281,4 @@
 			</div>
 		</div>
 	</c-modal-body>
-</c-modal>
+</c-modal> -->

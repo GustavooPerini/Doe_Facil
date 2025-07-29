@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.doe_facil.dto.AuthenticationDTO;
+import com.projeto.doe_facil.dto.LoginResponseDTO;
 import com.projeto.doe_facil.dto.UserDTO;
 import com.projeto.doe_facil.model.UserModel;
 import com.projeto.doe_facil.security.TokenService;
@@ -60,7 +61,7 @@ public class AuthController {
 
         var token = tokenService.generateToken((UserModel)auth.getPrincipal());
 
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     /**

@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 		this.formErrors = this.validationFormsService.errorMessages;
 
 		this.loginForm = this.authForm.group({
-			username: ["",[Validators.required]],
+			login: ["",[Validators.required]],
 			password: ["", [Validators.required]],
 		});
 
@@ -60,36 +60,16 @@ export class LoginComponent implements OnInit {
 	//Chamada para o serviço de login
 	public getAuthForm() {
 		this.toggleSpinnerVisible();
-		this.LoginService.loginAuth(
-			this.loginForm.get("username")?.value,
-			this.loginForm.get("password")?.value
-		).subscribe({
+		
+		this.LoginService.loginAuth(this.loginForm.value).subscribe({
 			next: (response) => {
 				this.toggleSpinnerVisible();
-				if (response.status == "user-authenticated") {
-					this.userService.setLoggedUser().subscribe({
-						next: (resp) => {
-							this.router.navigate(["/dashboard"]);
-						},
-					});
-				} else if (response.status == "user-not-found") {
-					this.loginErrorMessage =
-						"O usuário que você digitou não está cadastrado no sistema. Verifique se você digitou tudo corretamente.";
-					this.toggleLoginError();
-				} else if (response.status == "user-not-allowed") {
-					this.loginErrorMessage =
-						"Você não possui permissão para acessar o sistema. Confirme o seu cadastro pelo e-mail";
-					this.toggleLoginError();
-				} else if (response.status == "authentication-fail") {
-					this.loginErrorMessage =
-						"O nome de usuário e/ou a senha está incorreto. Verifique se você digitou tudo corretamente. Caso não lembre sua senha, clique em Esqueci minha senha para recuperá-la.";
-					this.toggleLoginError();
-				}
+				this.router.navigate(["/dashboard"]);
 			},
 			error: (err) => {
 				this.toggleSpinnerVisible();
 				this.loginErrorMessage =
-					"Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.";
+					"Login e/ou senha incorreto(s). Por favor, tente novamente.";
 				this.toggleLoginError();
 			},
 		});
