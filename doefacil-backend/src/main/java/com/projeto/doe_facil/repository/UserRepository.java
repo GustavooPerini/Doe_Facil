@@ -23,6 +23,13 @@ public interface UserRepository extends JpaRepository<UserModel, Long>{
     UserDetails findByLogin(String login);
 
     /**
+     * Realiza uma busca com o email do usuário.
+     * @param email email do usuário.
+     * @return O usuário que possui o email informado.
+     */
+    UserModel findByEmail(String email);
+
+    /**
      * Verifica se existe algum usuário com o userName passado.
      * @param userName nome do usuário no sistema.
      * @return true se existir, false se não.
