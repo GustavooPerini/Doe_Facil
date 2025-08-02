@@ -1,0 +1,491 @@
+<c-card>
+    <c-card-header>
+        <svg [cIcon]="icons.cilUserFemale" size="lg" title="Woman Icon"></svg>
+        <strong> &nbsp; Cadastro da Mulher</strong>
+    </c-card-header>
+
+    <c-card-body>
+        <form cForm novalidate (ngSubmit)="onSubmit()" [formGroup]="liveForm">
+            <c-container>
+                <c-row>
+                    <c-col [md]="5" *ngIf="liveForm.controls['name'] as ctrl">
+                        <label cLabel for="name">Nome Completo</label>
+                        <input 
+                            id="name"
+                            cFormControl  
+                            type="text"
+                            formControlName="name"
+                            [autofocus]="true"
+                            [valid]=isValid(ctrl)
+                        />
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O nome completo é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+                    <c-col [md]="3" *ngIf="liveForm.controls['birthDate'] as ctrl">
+                        <label cLabel for="birthDate">Data de Nascimento</label>
+                        <input 
+                            id="birthDate"
+                            cFormControl  
+                            type="date"
+                            formControlName="birthDate"
+                            [valid]=isValid(ctrl)
+                        />
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            A data de nascimento é obrigatória!
+                        </c-form-feedback>
+                    </c-col>
+                    <c-col [md]="4" *ngIf="liveForm.controls['race'] as ctrl">
+                        <label cLabel for="race">Raça/ Cor</label>
+                        <select 
+                            id="race"
+                            cSelect
+                            cFormControl  
+                            formControlName="race"
+                            [valid]=isValid(ctrl)
+                        >
+                            <option *ngFor="let race of (WomanRaces | keyvalue)" [value]="race.key">
+                                {{ race.value }}
+                            </option>
+						</select>
+
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            Selecione Raça/Cor!
+                        </c-form-feedback>
+                    </c-col>
+                </c-row>
+
+                <c-row class="mt-md-3 d-flex align-items-center">
+                    <c-col>
+                        <c-card class="ps-2 pt-2">
+                            <p class="mb-0 p-0">Naturalidade</p>
+                            <c-card-body class="d-flex flex-row gap-2 pt-1">
+                                <c-col *ngIf="liveForm.controls['birthState'] as ctrl">
+                                    <label cLabel for="birthState">Estado onde nasceu</label>
+                                    <input
+                                        id="birthState"
+                                        cFormControl  
+                                        type="text"
+                                        formControlName="birthState"
+                                        [valid]="
+                                            ctrl.touched && ctrl.valid ? true :
+                                            (submitted || ctrl.touched) && ctrl.invalid ? false :
+                                            undefined
+                                        "
+                                        [ngbTypeahead]="this.listStatesBrazil"
+                                    />
+
+                                    <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                        O estado de naturalidade é obrigatório!
+                                    </c-form-feedback>
+                                </c-col>
+                                <c-col *ngIf="liveForm.controls['birthCity'] as ctrl">
+                                    <label cLabel for="birthCity">Cidade onde nasceu</label>
+                                    <input 
+                                        id="birthCity"
+                                        cFormControl  
+                                        type="text"
+                                        formControlName="birthCity"
+                                        [valid]=isValid(ctrl)
+                                        [ngbTypeahead]="this.listCitiesBrazil"
+                                    />
+
+                                    <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                        A cidade de naturalidade é obrigatória!
+                                    </c-form-feedback>
+                                </c-col>
+                            </c-card-body>
+                        </c-card>
+                    </c-col>
+
+                    <c-col [md]="4" *ngIf="liveForm.controls['maritalStatus'] as ctrl">
+                        <label cLabel for="maritalStatus">Estado Cvil</label>
+                        <select
+                            id="maritalStatus"
+                            cSelect
+                            cFormControl
+                            formControlName="maritalStatus"
+                            [valid]=isValid(ctrl)
+                        >
+                            <option *ngFor="let wms of (WomanMaritalStatus | keyvalue)" [value]="wms.key">
+                                {{ wms.value }}
+                            </option>
+                        </select>
+
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            O estado civil é obrigatório!
+                        </c-form-feedback>
+                    </c-col>
+                </c-row>
+
+                <c-row class="mt-md-3">
+                    <c-col [md]="4" *ngIf="liveForm.controls['educationLevel'] as ctrl">
+                        <label cLabel for="educationLevel">Escolaridade</label>
+                        <select
+                            id="educationLevel"
+                            cSelect
+                            cFormControl
+                            formControlName="educationLevel"
+                            [valid]=isValid(ctrl)
+                        >
+                            <option *ngFor="let wel of (WomanEducationLevel | keyvalue)" [value]="wel.key">
+                                {{ wel.value }}
+                            </option>
+                        </select>
+
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            A escolaridade é obrigatória!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col [md]="4" *ngIf="liveForm.controls['occupationStatus'] as ctrl">
+                        <label cLabel for="occupationStatus">Ocupação</label>
+                        <select
+                            id="occupationStatus"
+                            cSelect
+                            cFormControl
+                            formControlName="occupationStatus"
+                            [valid]=isValid(ctrl)
+                        >
+                            <option *ngFor="let wos of (WomanOccupationStatus | keyvalue)" [value]="wos.key">
+                                {{ wos.value }}
+                            </option>
+                        </select>
+
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            A ocupação é obrigatória!
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col *ngIf="liveForm.controls['lastOccupationDescription'] as ctrl">
+                        <label cLabel for="lastOccupationDescription">Profissão (informar anterior caso desempregada/aposentada)</label>
+                        <input
+                            id="lastOccupationDescription"
+                            cFormControl
+                            type="text"
+                            formControlName="lastOccupationDescription"
+                            [valid]=isValid(ctrl)
+                        />
+
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            A profissão é obrigatória!
+                        </c-form-feedback>
+                    </c-col>
+                </c-row>
+
+                <c-row class="mt-md-3">
+                      <c-col *ngIf="liveForm.controls['susCard'] as ctrl">
+                        <label cLabel for="susCard">Cartão do SUS</label>
+                        <input
+                            id="susCard"
+                            cFormControl
+                            type="text"
+                            formControlName="susCard"
+                            [valid]=isValid(ctrl)
+                            mask="000 0000 0000 0000"
+                        />
+
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            <ng-container *ngIf="ctrl.errors as errors">
+                                <div *ngIf="errors?.required">
+                                    O Cartão do SUS é obrigatório!
+                                </div>
+                                <div *ngIf="errors?.minlength">
+                                    Cartão do SUS incompleto!
+                                </div>
+                            </ng-container>
+                        </c-form-feedback>
+                    </c-col>
+
+                    <c-col *ngIf="liveForm.controls['cpf'] as ctrl">
+                        <label cLabel for="cpf">CPF</label>
+                        <input
+                            id="cpf"
+                            cFormControl
+                            type="text"
+                            formControlName="cpf"
+                            [valid]=isValid(ctrl)
+                            mask="000.000.000-00"
+                        />
+
+                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                            <ng-container *ngIf="ctrl.errors as errors">
+                                <div *ngIf="errors?.required">
+                                    O CPF é obrigatório!
+                                </div>
+                                <div *ngIf="errors?.minlength">
+                                    CPF incompleto!
+                                </div>
+                            </ng-container>
+                        </c-form-feedback>
+                    </c-col>
+                </c-row>
+
+                <c-row class="mt-md-3">
+                    <c-col>
+                        <c-card class="ps-2 pt-2">
+                            <p class="mb-0 p-0">Contato</p>
+                            <c-card-body class="d-flex flex-row gap-2 pt-1">
+                                <c-col *ngIf="liveForm.controls['phone'] as ctrl">
+                                    <label cLabel for="phone">Telefone fixo</label>
+                                    <input 
+                                        id="phone"
+                                        cFormControl  
+                                        type="text"
+                                        formControlName="phone"
+                                        [valid]=isValid(ctrl)
+                                        mask="(00)0000-0000"
+                                    />
+                                    <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                       <ng-container *ngIf="ctrl.errors as errors">
+                                            <div *ngIf="errors?.required">
+                                                O telefone fixo é obrigatório!
+                                            </div>
+                                            <div *ngIf="errors?.minlength">
+                                                Telefone fixo incompleto!
+                                            </div>
+                                        </ng-container>
+                                    </c-form-feedback>
+                                </c-col>
+                                <c-col *ngIf="liveForm.controls['mobile'] as ctrl">
+                                    <label cLabel for="mobile">Celular</label>
+                                    <input 
+                                        id="mobile"
+                                        cFormControl  
+                                        type="text"
+                                        formControlName="mobile"
+                                        [valid]=isValid(ctrl)
+                                        mask="(00)00000-0000"
+                                    />
+                                    <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                        <ng-container *ngIf="ctrl.errors as errors">
+                                            <div *ngIf="errors?.required">
+                                                O celular é obrigatório!
+                                            </div>
+                                            <div *ngIf="errors?.minlength">
+                                                Celular incompleto!
+                                            </div>
+                                        </ng-container>
+                                    </c-form-feedback>
+                                </c-col>
+                                 <c-col *ngIf="liveForm.controls['email'] as ctrl">
+                                    <label cLabel for="email">E-mail</label>
+                                    <input 
+                                        id="email"
+                                        cFormControl  
+                                        type="text"
+                                        formControlName="email"
+                                        [valid]=isValid(ctrl)
+                                    />
+                                    <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                        <ng-container *ngIf="ctrl.errors as errors">
+                                            <div *ngIf="errors?.required">
+                                                O email é obrigatório!
+                                            </div>
+                                            <div *ngIf="errors?.email">
+                                                Endereço de email inválido
+                                            </div>
+                                        </ng-container>
+                                    </c-form-feedback>
+                                </c-col>
+                            </c-card-body>
+                        </c-card>
+                     </c-col>
+                </c-row>
+
+                <c-col>
+                    <c-card class="ps-2 pt-2 mt-3">
+                    <p class="mb-0 p-0">Endereço</p>
+                    <c-card-body>
+                        <!-- Primeira linha -->
+                        <c-row class="pt-1">
+                            <c-col md="3" *ngIf="liveForm.controls['cep'] as ctrl">
+                                <label cLabel for="cep">CEP</label>
+                                <input 
+                                    id="cep"
+                                    cFormControl  
+                                    type="text"
+                                    formControlName="cep"
+                                    [valid]=isValid(ctrl)
+                                    mask="00.000-000"
+                                />
+                                <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                    <ng-container *ngIf="ctrl.errors as errors">
+                                        <div *ngIf="errors?.required">
+                                            O CEP é obrigatório!
+                                        </div>
+                                        <div *ngIf="errors?.minlength">
+                                            CEP inválido!
+                                        </div>
+                                    </ng-container>
+                                </c-form-feedback>
+                            </c-col>
+                            <c-col *ngIf="liveForm.controls['street'] as ctrl">
+                                <label cLabel for="street">Rua</label>
+                                <input 
+                                    id="street"
+                                    cFormControl  
+                                    type="text"
+                                    formControlName="street"
+                                    [valid]=isValid(ctrl)
+                                />
+                                <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                    A rua é obrigatória!
+                                </c-form-feedback>
+                            </c-col>
+                             <c-col md="2" *ngIf="liveForm.controls['number'] as ctrl">
+                                <label cLabel for="number">Número</label>
+                                <input 
+                                    id="number"
+                                    cFormControl  
+                                    type="number"
+                                    formControlName="number"
+                                    [valid]=isValid(ctrl)
+                                />
+                                <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                    O número é obrigatório!
+                                </c-form-feedback>
+                            </c-col>
+                            <c-col md="4" *ngIf="liveForm.controls['city'] as ctrl">
+                                <label cLabel for="city">Cidade</label>
+                                <input 
+                                    id="city"
+                                    cFormControl  
+                                    type="text"
+                                    formControlName="city"
+                                    [valid]=isValid(ctrl)
+                                    [ngbTypeahead]="this.listCitiesBrazil"
+                                />
+                                <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                    A cidade é obrigatória!
+                                </c-form-feedback>
+                            </c-col>
+                        </c-row>
+
+                        <!-- Segunda linha -->
+                        <c-row class="pt-3">
+                             <c-col md="4" *ngIf="liveForm.controls['neighborhood'] as ctrl">
+                                <label cLabel for="neighborhood">Bairro</label>
+                                <input 
+                                    id="neighborhood"
+                                    cFormControl  
+                                    type="text"
+                                    formControlName="neighborhood"
+                                    [valid]=isValid(ctrl)
+                                />
+                                <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                    O bairro é obrigatório!
+                                </c-form-feedback>
+                            </c-col>
+                            <c-col *ngIf="liveForm.controls['addInfo'] as ctrl">
+                                <label cLabel for="addInfo">Complemento</label>
+                                <input 
+                                    id="addInfo"
+                                    cFormControl  
+                                    type="text"
+                                    formControlName="addInfo"
+                                    [valid]=isValid(ctrl)
+                                />
+                                <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                    O complemento é obrigatório!
+                                </c-form-feedback>
+                            </c-col>
+                        </c-row>
+                        <c-row>
+                            <c-col class="pt-3" *ngIf="liveForm.controls['refPoint'] as ctrl">
+                                <label for="refPoint">Ponto de Referência</label>
+                                <input
+                                    id="refPoint"
+                                    cFormControl
+                                    type="text"
+                                    formControlName="refPoint"
+                                    [valid]=isValid(ctrl)
+                                >
+                                <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
+                                    O ponto de referência é obrigatório!
+                                </c-form-feedback>
+                            </c-col>
+                        </c-row>
+                    </c-card-body>
+                    </c-card>
+                </c-col>
+
+                <div class="d-grid gap-2 d-flex justify-content-end mt-md-4">
+                    <button
+                        cButton
+                        type="submit"
+                        class="btn btn-success btn-block pad-btn"
+                    >
+                        <fa-icon
+                            [icon]="iconsFa.faCirclePlus"
+                            class="cardIcon fa-lg fa-fw"
+						></fa-icon>
+                        &nbsp; Cadastrar
+                    </button>
+                </div>
+            </c-container>
+        </form>
+    </c-card-body>
+
+    <!--MODAL DE SUCESSO-->
+	<c-modal
+		id="successModal"
+		[visible]="successVisible"
+		(visibleChange)="handleSuccessModalChange($event)"
+	>
+		<c-modal-header>
+			<h5 cModalTitle>Sucesso</h5>
+			<button (click)="toggleSuccessModal()" cButtonClose></button>
+		</c-modal-header>
+		<c-modal-body>
+			<div
+				class="alert alert-success"
+				role="alert"
+				style="font-size: 18px"
+			>
+				Mulher cadastrada com sucesso.
+			</div>
+		</c-modal-body>
+		<c-modal-footer>
+			<button
+				class="pad-btn"
+				(click)="toggleSuccessModal()"
+				cButton
+				color="success"
+			>
+				Fechar
+			</button>
+		</c-modal-footer>
+	</c-modal>
+
+	<!--MODAL DE ERRO-->
+	<c-modal
+		id="errorModal"
+		[visible]="errorVisible"
+		(visibleChange)="handleErrorModalChange($event)"
+	>
+		<c-modal-header>
+			<h5 cModalTitle>Ocorreu um erro</h5>
+			<button (click)="toggleErrorModal()" cButtonClose></button>
+		</c-modal-header>
+		<c-modal-body>
+			<div
+				class="alert alert-danger"
+				role="alert"
+				style="font-size: 18px"
+			>
+                Ocorreu um erro ao realizar o cadastro.
+			</div>
+		</c-modal-body>
+		<c-modal-footer>
+			<button
+				class="pad-btn"
+				(click)="toggleErrorModal()"
+				cButton
+				color="danger"
+			>
+				Fechar
+			</button>
+		</c-modal-footer>
+	</c-modal>
+</c-card>

@@ -2,17 +2,33 @@ package com.projeto.doe_facil.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
+/**
+ * DTO que contém as informações necessárias para realizar o cadastro.
+ * @author Gustavo Perini.
+ */
 public class UserDTO {
     
+    /**
+     * Nome de usuário.
+     */
     @NotBlank
     private String userName;
 
+    /**
+     * Login do usuário.
+     */
     @NotBlank
     private String login;
 
+    /**
+     * Senha do usuário.
+     */
     @NotBlank
     private String password;
 
+    /**
+     * E-mail do usuário.
+     */
     @NotBlank
     private String email;
 

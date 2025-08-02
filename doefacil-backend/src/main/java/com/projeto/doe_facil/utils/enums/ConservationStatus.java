@@ -1,19 +1,12 @@
 package com.projeto.doe_facil.utils.enums;
 
+/**
+ * Enum que classifica o estado de conservação do item.
+ * @author Gustavo Perini.
+ */
 public enum ConservationStatus {
-    NEW("Novo"),
-    LIGHTLY_USED("Levemente Usado"),
-    USED("Usado"),
-    HEAVILY_USED("Usado Intensamente");
-
-    private String status;
-
-    ConservationStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
+    NEW,
+    LIGHTLY_USED,
+    USED,
+    HEAVILY_USED
 }

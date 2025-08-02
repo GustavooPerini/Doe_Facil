@@ -16,15 +16,32 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Classe responsável por criar um filtro de segurança. Ela verifica se o usuário possui um token
+ * e se está valido. Esse filtro é chamado toda vez que uma requisição é feita.
+ * @author Gustavo Perini.
+ */
 @Component
 public class SecurityFilter extends OncePerRequestFilter{
 
+    /**
+     * Serviço de token.
+     */
     @Autowired
     private TokenService tokenService;
 
+    /**
+     * Repositório do usuário
+     */
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Método que implementa como o a filtragem é feita quando uma requisição é feita.
+     * @param request A requisição feita ao servidor.
+     * @param response A resposta que o será enviada.
+     * @param filterChain A cadeia de filtros.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -41,7 +58,11 @@ public class SecurityFilter extends OncePerRequestFilter{
         filterChain.doFilter(request, response);
     }
     
-
+    /**
+     * Método que pega o token presente na requisição.
+     * @param request A requisição feita ao servidor.
+     * @return O token do usuário.
+     */
     private String recoverToken(HttpServletRequest request) {
         
         var authHeader = request.getHeader("Authorization");

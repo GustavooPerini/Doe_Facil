@@ -1,0 +1,283 @@
+<p>Editar meus dados</p>
+
+<!-- <c-card>
+	<c-card-header>
+		<fa-icon [icon]="icons.faUser" class="cardIcon fa-lg fa-fw"></fa-icon>
+		<strong> &nbsp; Editando meus dados</strong>
+	</c-card-header>
+
+	<c-card-body>
+		<form
+			cForm
+			[formGroup]="editForm"
+			novalidate
+			(ngSubmit)="receiveFormData()"
+		>
+			<c-container>
+				<c-row class="mb-3">
+					<c-col
+						[sm]="6"
+						*ngIf="editForm.controls['fullName'] as ctrl"
+					>
+						<label cLabel for="fullName">Nome Completo:</label>
+						<input
+							cFormControl
+							id="fullName"
+							formControlName="fullName"
+							placeholder="Nome Completo"
+							autocomplete="off"
+							required
+							[autofocus]="true"
+							[valid]="
+								ctrl.touched && ctrl.valid
+									? true
+									: (submitted || ctrl.touched) &&
+									  ctrl.invalid
+									? false
+									: undefined
+							"
+						/>
+						<c-form-feedback
+							*ngIf="submitted || ctrl.invalid"
+							[valid]="!(submitted || ctrl.invalid)"
+						>
+							<ng-container *ngIf="ctrl.errors as errors">
+								<div *ngIf="errors.required">
+									O nome completo é obrigatório!
+								</div>
+							</ng-container>
+						</c-form-feedback>
+					</c-col>
+
+					<c-col
+						[sm]="6"
+						*ngIf="editForm.controls['userName'] as ctrl"
+					>
+						<label cLabel for="userName">Nome de Usuário:</label>
+						<input
+							cFormControl
+							id="userName"
+							formControlName="userName"
+							placeholder="Nome de Usuário"
+							autocomplete="off"
+							required
+							[valid]="
+								ctrl.touched && ctrl.valid
+									? true
+									: (submitted || ctrl.touched) &&
+									  ctrl.invalid
+									? false
+									: undefined
+							"
+						/>
+						<c-form-feedback
+							*ngIf="submitted || ctrl.invalid"
+							[valid]="!(submitted || ctrl.invalid)"
+						>
+							<ng-container *ngIf="ctrl.errors as errors">
+								<div *ngIf="errors.required">
+									O nome de usuário é obrigatório!
+								</div>
+								<div *ngIf="errors.minlength">
+									{{ formErrors.userName.minLength }}
+								</div>
+								<div *ngIf="errors.pattern">
+									{{ formErrors.userName.pattern }}
+								</div>
+							</ng-container>
+						</c-form-feedback>
+					</c-col>
+				</c-row>
+
+				<c-row>
+					<c-col [sm]="6" *ngIf="editForm.controls['email'] as ctrl">
+						<label cLabel for="email">E-mail</label>
+						<input
+							cFormControl
+							id="email"
+							type="email"
+							formControlName="email"
+							placeholder="E-mail"
+							autocomplete="off"
+							required
+							[valid]="
+								ctrl.touched && ctrl.valid
+									? true
+									: (submitted || ctrl.touched) &&
+									  ctrl.invalid
+									? false
+									: undefined
+							"
+						/>
+						<c-form-feedback
+							*ngIf="submitted || ctrl.invalid"
+							[valid]="!(submitted || ctrl.invalid)"
+						>
+							<ng-container *ngIf="ctrl.errors as errors">
+								<div *ngIf="errors?.required">
+									O email é obrigatório!
+								</div>
+								<div *ngIf="errors?.email">
+									{{ formErrors.email?.email }}
+								</div>
+							</ng-container>
+						</c-form-feedback>
+					</c-col>
+				</c-row>
+
+				<c-row>
+					<c-col
+						[sm]="6"
+						*ngIf="editForm.controls['password'] as ctrl"
+					>
+						<label cLabel for="password">Senha Atual:</label>
+						<input
+							cFormControl
+							id="password"
+							type="password"
+							formControlName="password"
+							placeholder="Senha"
+							autocomplete="new-password"
+							required
+							(blur)="checkUserPassword(editForm.value.password)"
+							[valid]="
+								ctrl.touched &&
+								ctrl.valid &&
+								!incorrectPasswordFlag
+									? true
+									: (submitted || ctrl.touched) &&
+									  ctrl.invalid
+									? false
+									: undefined
+							"
+						/>
+						<small
+							*ngIf="incorrectPasswordFlag && ctrl.touched"
+							class="form-text text-danger"
+						>
+							Sua senha está incorreta
+						</small>
+						<small
+							*ngIf="!incorrectPasswordFlag && ctrl.touched"
+							class="form-text text-success"
+						>
+							Sua senha está correta
+						</small>
+					</c-col>
+
+					<c-col
+						[sm]="6"
+						*ngIf="editForm.controls['newPassword'] as ctrl"
+					>
+						<label cLabel for="newPassword"
+							>Nova Senha (Opcional):</label
+						>
+						<input
+							cFormControl
+							id="newPassword"
+							type="password"
+							formControlName="newPassword"
+							placeholder="Nova Senha"
+							autocomplete="off"
+							[autofocus]="true"
+							[valid]="
+								ctrl.touched && ctrl.valid
+									? true
+									: (submitted || ctrl.touched) &&
+									  ctrl.invalid
+									? false
+									: undefined
+							"
+						/>
+						<c-form-feedback
+							*ngIf="submitted || ctrl.invalid"
+							[valid]="!(submitted || ctrl.invalid)"
+						>
+							<ng-container *ngIf="ctrl.errors as errors">
+								<div *ngIf="errors.minlength">
+									A nova senha deve ter 5 caracteres ou mais
+								</div>
+								<div *ngIf="errors.pattern">
+									A nova senha deve conter: números, letras
+									maiúsculas e minúsculas
+								</div>
+							</ng-container>
+						</c-form-feedback>
+					</c-col>
+				</c-row>
+
+				<br /><br />
+				<div class="d-grid gap-2 d-flex justify-content-end">
+					<button
+						[disabled]="editForm.invalid || incorrectPasswordFlag"
+						cButton
+						type="submit"
+						class="pad-btn btn-success"
+					>
+						<fa-icon
+							[icon]="iconsFa.faCircleCheck"
+							class="cardIcon fa-lg fa-fw"
+						></fa-icon
+						>&nbsp; Atualizar cadastro
+					</button>
+				</div>
+			</c-container>
+		</form>
+	</c-card-body>
+</c-card>
+
+MODAL DE ERRO EM ATUALIZAR USUARIO
+<c-modal
+	id="responseModal"
+	[visible]="editErrorVisible"
+	(visibleChange)="handleEditError($event)"
+>
+	<c-modal-header>
+		<h3 cModalTitle>Erro editar usuário</h3>
+		<button (click)="toggleEditError()" cButtonClose></button>
+	</c-modal-header>
+	<c-modal-body>
+		<div class="alert alert-danger" role="alert" style="font-size: 18px">
+			Erro em atualizar os dados, verifique os campos e tente novamente!
+			Se o erro persistir, entre em contato com os administradores do
+			sistema.
+		</div>
+	</c-modal-body>
+	<c-modal-footer>
+		<button
+			(click)="toggleEditError()"
+			cButton
+			color="danger"
+			class="pad-btn"
+		>
+			Fechar
+		</button>
+	</c-modal-footer>
+</c-modal>
+
+MODAL DE SUCESSO EM ATUALIZAR USUARIO
+<c-modal
+	id="responseModal"
+	[visible]="editSuccessVisible"
+	(visibleChange)="handleEditSuccess($event)"
+>
+	<c-modal-header>
+		<h3 cModalTitle>Sucesso</h3>
+		<button (click)="toggleEditSuccess()" cButtonClose></button>
+	</c-modal-header>
+	<c-modal-body>
+		<div class="alert alert-success" role="alert" style="font-size: 18px">
+			Seus dados foram atualizados com sucesso!
+		</div>
+	</c-modal-body>
+	<c-modal-footer>
+		<button
+			(click)="toggleEditSuccess()"
+			cButton
+			color="success"
+			class="pad-btn"
+		>
+			Fechar
+		</button>
+	</c-modal-footer>
+</c-modal> -->

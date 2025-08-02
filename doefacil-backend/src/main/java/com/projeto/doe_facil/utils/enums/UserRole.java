@@ -1,5 +1,9 @@
 package com.projeto.doe_facil.utils.enums;
 
+/**
+ * Enum que classifica a role do usuário.
+ * @author Gustavo Perini.
+ */
 public enum UserRole {
     ADMIN("admin"),
     USER("user");
