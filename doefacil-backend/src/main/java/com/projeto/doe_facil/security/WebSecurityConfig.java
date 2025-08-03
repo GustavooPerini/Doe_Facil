@@ -49,6 +49,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
                     .requestMatchers("/user/admin/**", "/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/items/**").permitAll()
                     .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
