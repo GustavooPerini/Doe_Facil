@@ -21,6 +21,6 @@ export class LoginService {
 		const body = {
 			email: email,
 		};
-		return this.http.post(`${URL_API}/api-open/password-recovery`, body);
+		return this.http.post(`${URL_API}/auth/password-recovery`, body);
 	}
 }

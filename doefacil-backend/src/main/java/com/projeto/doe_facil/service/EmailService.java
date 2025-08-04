@@ -1,6 +1,6 @@
 package com.projeto.doe_facil.service;
 
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
-
-    //comentado para evitar erro nos testes
-    //@Autowired
+    
+    @Autowired
     private JavaMailSender javaMailSender;
 
     @Value("${spring.mail.username}")

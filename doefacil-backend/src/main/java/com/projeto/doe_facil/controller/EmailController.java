@@ -22,7 +22,7 @@ public class EmailController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("/api-open/password-recovery")
+    @PostMapping("/auth/password-recovery")
     public String passwordRecovery (@RequestBody Map <String, String> emailMap) {
         
         String email = emailMap.get("email");
