@@ -1,1 +1,110 @@
-<p>Anunciar Item</p>
+<form cForm novalidate (ngSubmit)="onSubmit()" [formGroup]="liveForm">
+    <c-card>
+        <c-card-header>
+            <fa-icon [icon]="iconsFa.faInbox" class="cardIcon fa-lg fa-fw"></fa-icon>
+            <strong>&nbsp; Informações do Item</strong>
+        </c-card-header>
+
+        <c-card-body>
+            <c-container>
+                <c-row class="mt-md-3 d-flex align-items-center">
+                    <c-col [md]="6">
+                        <label cLabel for="title">Nome do Item:</label>
+                        <input id="title" type="text" cFormControl formControlName="title">
+                    </c-col>
+                    <c-col >
+                        <label cLabel for="description">Descrição do Item:</label>
+                        <textarea id="description" cFormControl formControlName="description"></textarea>
+                    </c-col>
+                </c-row>
+                <c-row class="mt-md-3 d-flex align-items-center">
+                    <c-col>
+                        <label for="category">Categoria:</label>
+                        <select id="category" cSelect formControlName="category">
+                            <option *ngFor="let category of (categories | keyvalue)" [value]="category.key">
+                                {{ category.value }}
+                            </option>
+                        </select>
+                    </c-col>
+                    <c-col>
+                        <label for="conservationStatus">Estado de Conservação:</label>
+                        <select id="conservationStatus" cSelect formControlName="conservationStatus">
+                            <option *ngFor="let status of (conservationStatus | keyvalue)" [value]="status.key">
+                                {{ status.value }}
+                            </option>
+                        </select>
+                    </c-col>
+                </c-row >
+                <c-row class="mt-md-3 d-flex align-items-center">
+                    <c-col>
+                        <label cLabel for="imageSrc">Imagem do Item</label>
+                        <input id="imageSrc" cFormControl type="file" formControlName="imageSrc">
+                    </c-col>
+                </c-row>
+            </c-container>
+        </c-card-body>
+    </c-card>
+
+    <br>
+
+    <c-card>
+        <c-card-header>
+            <fa-icon [icon]="iconsFa.faMapLocationDot" class="cardIcon fa-lg fa-fw"></fa-icon>
+            <strong>&nbsp; Localização do Item</strong>
+        </c-card-header>
+
+        <c-card-body>
+            <c-container>
+                <c-row class="mt-md-3 d-flex align-items-center">
+                    <c-col [md]="3">
+                        <label cLabel for="cep">CEP:</label>
+                        <input id="cep" type="text" cFormControl formControlName="cep">
+                    </c-col>
+                    <c-col>
+                        <label cLabel for="street">Rua:</label>
+                        <input id="street" type="text" cFormControl formControlName="street">
+                    </c-col>
+                    <c-col [md]="2">
+                        <label cLabel for="houseNumber">Número:</label>
+                        <input id="houseNumber" type="number" cFormControl formControlName="houseNumber">
+                    </c-col>
+                    <c-col [md]="4">
+                        <label cLabel for="neighborhood">Bairro:</label>
+                        <input id="neighborhood" type="text" cFormControl formControlName="neighborhood">
+                    </c-col>
+                </c-row>
+
+                <c-row class="mt-md-3 d-flex align-items-center">
+                    <c-col [md]="4">
+                        <label cLabel for="city">Cidade:</label>
+                        <input id="city" type="text" cFormControl formControlName="city">
+                    </c-col>
+                    <c-col [md]="4">
+                        <label cLabel for="state">Estado:</label>
+                        <input id="state" type="text" cFormControl formControlName="state">
+                    </c-col>
+                </c-row>
+
+                <c-row class="mt-md-3 d-flex align-items-center">
+                    <c-col [md]="3">
+                        <label cLabel for="addInfo">Complemento:</label>
+                        <input id="addInfo" type="text" cFormControl formControlName="addInfo">
+                    </c-col>
+                    <c-col>
+                        <label cLabel for="refPoint">Ponto de Referência:</label>
+                        <input id="refPoint" type="text" cFormControl formControlName="refPoint">
+                    </c-col>
+                </c-row>
+
+                <div class="d-grid gap-2 d-flex justify-content-end mt-md-4">
+                    <button cButton type="submit" class="btn btn-success btn-block pad-btn">
+                        <fa-icon [icon]="iconsFa.faCirclePlus" class="cardIcon fa-lg fa-fw"></fa-icon>
+                        &nbsp; Cadastrar
+                    </button>
+                </div>
+
+            </c-container>
+        </c-card-body>
+    </c-card>
+</form>
+
