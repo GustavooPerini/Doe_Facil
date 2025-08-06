@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { DateStrPipe } from "./date-str.pipe";
 import { AgePipe } from "./age.pipe";
+import { EnumOrderPipe } from "./enum-order.pipe";
 
 // other imports
 
@@ -8,7 +9,7 @@ import { AgePipe } from "./age.pipe";
 	imports: [
 		// dep modules
 	],
-	declarations: [DateStrPipe, AgePipe],
-	exports: [DateStrPipe, AgePipe],
+	declarations: [DateStrPipe, AgePipe, EnumOrderPipe],
+	exports: [DateStrPipe, AgePipe, EnumOrderPipe],
 })
 export class PipesModule {}

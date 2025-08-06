@@ -8,5 +8,6 @@ export enum ItemCategory {
     KITCHEN_UTENSILS = "Utensílios Domésticos e de Cozinha",
     OFFICE_SCHOOL_SUPPLIES = "Material Escolar e de Escritório",
     PERSONAL_CARE_PRODUCTS = "Produtos de Higiene Pessoal",
-    SPORTS_LEISURE_ITEMS = "Artigos Esportivos e Lazer"
+    SPORTS_LEISURE_ITEMS = "Artigos Esportivos e Lazer",
+    OTHER = "Outra"
 }

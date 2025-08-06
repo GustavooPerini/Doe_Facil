@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faCirclePlus, faInbox, faMapLocationDot, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ItemCategory } from '../../../models/enums/itemCategory.enum';
 import { ConservationStatus } from '../../../models/enums/conservationStatus.enum';
+import { ViaCepService } from '../../../services/via-cep.service';
 
 @Component({
   selector: 'app-create-item',
@@ -15,12 +16,15 @@ export class CreateItemComponent {
   public conservationStatus = ConservationStatus
 
   submitted = false;
+  sucessVisible = false;
+  errorVisible = false;
 
 
   public liveForm!: FormGroup
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private viaCepService: ViaCepService
   ){
     this.createForm();
   }
@@ -46,7 +50,76 @@ export class CreateItemComponent {
   }
 
   onSubmit() {
-    console.log(this.liveForm.value);
+
+    if(this.onValidate()) {
+
+      console.log(this.liveForm.value);
+      this.onReset();
+      this.toggleSuccessModal();
+    }
+    else {
+      this.toggleErrorModal();
+    }
+
   }
+
+  fetchAddressByCep() {
+    const cepControl = this.liveForm.get("cep");
+    if(cepControl && cepControl.valid) {
+      this.viaCepService.getAddress(cepControl.value).subscribe({
+        next: (address) => {
+          this.liveForm.patchValue({
+            street: address.street,
+            neighborhood: address.neighborhood,
+            city: address.city,
+            state: address.state
+          });
+        },
+        error: () => {
+          this.liveForm.patchValue({
+            street: "",
+            neighborhood: "",
+            city: "",
+            state: ""
+          });
+        }
+      });
+    }
+  }
+
+  isValid(ctrl: AbstractControl<any, any>){
+      if (ctrl.touched && ctrl.valid)
+        return true 
+      else if ((ctrl.touched || this.submitted) && ctrl.invalid) 
+        return false
+      else
+        return undefined
+                              
+    }
+
+    onValidate(){
+		  return this.liveForm.status === "VALID";
+    }
+    
+    onReset() {
+      this.submitted = false;
+      this.liveForm.reset();
+	  }
+
+    toggleSuccessModal() {
+		  this.sucessVisible = !this.sucessVisible;
+	  }
+
+	handleSuccessModalChange(event: any) {
+		this.sucessVisible = event;
+	}
+
+	toggleErrorModal() {
+		this.errorVisible = !this.errorVisible;
+	}
+
+	handleErrorModalChange(event: any) {
+		this.errorVisible = event;
+	}
 
 }

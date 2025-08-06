@@ -8,6 +8,8 @@ import { ViewReceivedItensComponent } from './view-received-itens/view-received-
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule, CardModule, FormModule, GridModule, ModalModule } from '@coreui/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PipesModule } from '../../utils/pipes/pipes.module';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
@@ -22,6 +24,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ModalModule,
     ButtonModule,
     FontAwesomeModule,
-  ]
+    PipesModule,
+    NgxMaskDirective
+  ],
+  providers: [provideNgxMask()]
 })
 export class ItemModule { }
