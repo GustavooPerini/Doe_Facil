@@ -4,6 +4,7 @@ import { faCirclePlus, faInbox, faMapLocationDot, faUser } from '@fortawesome/fr
 import { ItemCategory } from '../../../models/enums/itemCategory.enum';
 import { ConservationStatus } from '../../../models/enums/conservationStatus.enum';
 import { ViaCepService } from '../../../services/via-cep.service';
+import { ItemService } from '../../../services/item.service';
 
 @Component({
   selector: 'app-create-item',
@@ -24,7 +25,8 @@ export class CreateItemComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private viaCepService: ViaCepService
+    private viaCepService: ViaCepService,
+    private itemService: ItemService
   ){
     this.createForm();
   }
@@ -44,7 +46,6 @@ export class CreateItemComponent {
       state: ["", Validators.required],
       refPoint: ["", Validators.required],
       cep: ["", Validators.required]
-      // donated
       // owner
     })
   }
@@ -53,14 +54,19 @@ export class CreateItemComponent {
 
     if(this.onValidate()) {
 
-      console.log(this.liveForm.value);
-      this.onReset();
-      this.toggleSuccessModal();
+      this.itemService.createItem(this.liveForm.value).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.onReset();
+          this.toggleSuccessModal();
+        },
+        error: (error) => {
+          console.log(error);
+          this.onReset();
+          this.toggleErrorModal();
+        }
+      })
     }
-    else {
-      this.toggleErrorModal();
-    }
-
   }
 
   fetchAddressByCep() {
