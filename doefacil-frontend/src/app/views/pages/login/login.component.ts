@@ -8,6 +8,7 @@ import { UserService } from "../../../services/user.service";
 import { LoginService } from "./../../../services/login.service";
 
 import { cilBook } from "@coreui/icons";
+import { TokenService } from "../../../services/token.service";
 
 @Component({
 	selector: "app-login",
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		public validationFormsService: ValidationFormsService,
 		private userService: UserService,
+		private tokenService: TokenService
 	) {
 		this.formErrors = this.validationFormsService.errorMessages;
 
@@ -63,6 +65,8 @@ export class LoginComponent implements OnInit {
 		
 		this.LoginService.loginAuth(this.loginForm.value).subscribe({
 			next: (response) => {
+				console.log(response.token);
+				this.tokenService.setToken(response.token);
 				this.toggleSpinnerVisible();
 				this.router.navigate(["/dashboard"]);
 			},
