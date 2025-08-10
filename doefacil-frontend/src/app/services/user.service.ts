@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import User from "./../models/User";
 import { DEFAULT_ROLE } from "../../environments/environment";
-import AuthDTO from "../models/AuthDTO";
+//import AuthDTO from "../models/AuthDTO";
 
 @Injectable({
 	providedIn: "root",
@@ -72,9 +72,9 @@ export class UserService {
 		return new User();
 	}
 
-	public userLoginRegister(user: AuthDTO): Observable<any> {
-		return this.http.post(`${URL_API}/auth/register`, user);
-	}
+	// public userLoginRegister(user: AuthDTO): Observable<any> {
+	// 	return this.http.post(`${URL_API}/auth/register`, user);
+	// }
 
 	public getAuthLoggedUser(): Observable<any> {
 		return this.http.get(`${URL_API}/api/user/logged-user`);

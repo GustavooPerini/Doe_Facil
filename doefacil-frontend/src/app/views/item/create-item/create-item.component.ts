@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faCirclePlus, faInbox, faMapLocationDot, faUser } from '@fortawesome/free-solid-svg-icons';
-import { ItemCategory } from '../../../models/enums/itemCategory.enum';
 import { ConservationStatus } from '../../../models/enums/conservationStatus.enum';
 import { ViaCepService } from '../../../services/via-cep.service';
 import { ItemService } from '../../../services/item.service';
+import { Category } from '../../../models/Category';
+import { Router } from '@angular/router';
+import { ItemCreate } from '../../../models/ItemCreate';
 
 @Component({
   selector: 'app-create-item',
@@ -13,7 +15,7 @@ import { ItemService } from '../../../services/item.service';
 export class CreateItemComponent {
   public iconsFa = { faCirclePlus, faUser, faInbox, faMapLocationDot}
 
-  public categories = ItemCategory
+  public categories: Category[] = [];
   public conservationStatus = ConservationStatus
 
   submitted = false;
@@ -25,28 +27,26 @@ export class CreateItemComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private viaCepService: ViaCepService,
-    private itemService: ItemService
+    private itemService: ItemService,
+    private router: Router
   ){
     this.createForm();
+  }
+
+  ngOnInit() {
+    this.itemService.categories().subscribe({
+      next: (cats) => (this.categories = cats),
+      error: () => (this.categories = [])
+    });
   }
 
   createForm() {
     this.liveForm = this.formBuilder.group({
       title: ["", [Validators.required]],
       description: ["", [Validators.required]],
-      category: ["", [Validators.required]],
-      conservationStatus: ["", [Validators.required]],
-      imageSrc: [null, [Validators.required]],
-      street: ["", [Validators.required]],
-      houseNumber: ["", [Validators.required]],
-      addInfo: ["", [Validators.required]],
-      neighborhood: ["", [Validators.required]],
-      city: ["", Validators.required],
-      state: ["", Validators.required],
-      refPoint: ["", Validators.required],
-      cep: ["", Validators.required]
-      // owner
+      categoryId: [null as unknown as number, [Validators.required]],
+      city: ["", [Validators.required]],
+      state: ["", [Validators.required]],
     })
   }
 
@@ -54,9 +54,8 @@ export class CreateItemComponent {
 
     if(this.onValidate()) {
 
-      this.itemService.createItem(this.liveForm.value).subscribe({
+      this.itemService.create(this.liveForm.value as ItemCreate).subscribe({
         next: (response) => {
-          console.log(response);
           this.onReset();
           this.toggleSuccessModal();
         },
@@ -66,30 +65,6 @@ export class CreateItemComponent {
           this.toggleErrorModal();
         }
       })
-    }
-  }
-
-  fetchAddressByCep() {
-    const cepControl = this.liveForm.get("cep");
-    if(cepControl && cepControl.valid) {
-      this.viaCepService.getAddress(cepControl.value).subscribe({
-        next: (address) => {
-          this.liveForm.patchValue({
-            street: address.street,
-            neighborhood: address.neighborhood,
-            city: address.city,
-            state: address.state
-          });
-        },
-        error: () => {
-          this.liveForm.patchValue({
-            street: "",
-            neighborhood: "",
-            city: "",
-            state: ""
-          });
-        }
-      });
     }
   }
 
@@ -103,18 +78,18 @@ export class CreateItemComponent {
                               
     }
 
-    onValidate(){
-		  return this.liveForm.status === "VALID";
-    }
-    
-    onReset() {
-      this.submitted = false;
-      this.liveForm.reset();
-	  }
+  onValidate(){
+    return this.liveForm.status === "VALID";
+  }
+  
+  onReset() {
+    this.submitted = false;
+    this.liveForm.reset();
+  }
 
-    toggleSuccessModal() {
-		  this.sucessVisible = !this.sucessVisible;
-	  }
+  toggleSuccessModal() {
+    this.sucessVisible = !this.sucessVisible;
+  }
 
 	handleSuccessModalChange(event: any) {
 		this.sucessVisible = event;
@@ -128,4 +103,8 @@ export class CreateItemComponent {
 		this.errorVisible = event;
 	}
 
+  goToDashboard() {
+    this.toggleSuccessModal();
+    this.router.navigate(["/dashboard"]);
+  }
 }

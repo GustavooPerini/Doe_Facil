@@ -1,14 +1,24 @@
-<div *ngIf="loggedUser != undefined">
-	<c-row class="align-itens-center">
-		<c-col>
-			<app-widgets-general [loggedUser]="loggedUser">
-			</app-widgets-general>
-		</c-col>
-	</c-row>
-	<!-- <c-row>
-		<c-col>
-			<app-recent-activities [loggedUser]="loggedUser">
-			</app-recent-activities>
-		</c-col>
-	</c-row> -->
+<div class="container">
+  <div class="header">
+    <h2>Itens disponíveis</h2>
+    <a routerLink="/dashboard/item/novo" class="btn">Cadastrar item</a>
+  </div>
+
+  <div *ngIf="loading">Carregando...</div>
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <div class="grid" *ngIf="page">
+    <div class="card" *ngFor="let it of page.content">
+      <div class="title">{{ it.title }}</div>
+      <div class="muted">{{ it.category }} • {{ it.city }}/{{ it.state }}</div>
+      <div class="status" [attr.data-status]="it.status">{{ it.status }}</div>
+      <div class="desc">{{ it.description }}</div>
+    </div>
+  </div>
+
+  <div class="pager" *ngIf="page">
+    <button (click)="prev()" [disabled]="page.number === 0">Anterior</button>
+    <span>Página {{ page.number + 1 }} de {{ page.totalPages || 1 }}</span>
+    <button (click)="next()" [disabled]="page.number >= (page.totalPages - 1)">Próxima</button>
+  </div>
 </div>

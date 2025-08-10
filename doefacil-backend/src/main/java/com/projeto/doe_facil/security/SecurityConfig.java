@@ -29,8 +29,8 @@ public class SecurityConfig {
       .csrf(csrf -> csrf.disable())
       .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(auth -> auth
-        .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
-        .requestMatchers(HttpMethod.GET, "/api/items").permitAll() // listar itens é público
+        .requestMatchers(HttpMethod.POST, "/auth/**", "/auth/password-recovery").permitAll()
+        .requestMatchers(HttpMethod.GET, "/api/items", "/api/categories").permitAll() // listar itens é público
         .requestMatchers("/api/admin/**").hasRole("ADMIN")
         .anyRequest().authenticated()
       )

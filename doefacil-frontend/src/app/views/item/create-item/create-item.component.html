@@ -10,7 +10,7 @@
                 <c-row class="mt-md-3 d-flex align-items-center">
                     <c-col [md]="6" *ngIf="liveForm.controls['title'] as ctrl">
                         <label cLabel for="title">Nome do Item:</label>
-                        <input id="title" type="text" cFormControl 
+                        <input id="title" type="text" cFormControl placeholder="Ex.: Sofá 3 lugares"
                             formControlName="title" [valid]=isValid(ctrl)>
                         <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
                             O nome do item é obrigatório!
@@ -18,7 +18,7 @@
                     </c-col>
                     <c-col *ngIf="liveForm.controls['description'] as ctrl">
                         <label cLabel for="description">Descrição do Item:</label>
-                        <textarea id="description" cFormControl 
+                        <textarea id="description" cFormControl placeholder="Detalhes, estado de conservação..."
                             formControlName="description" [valid]=isValid(ctrl)></textarea>
                         <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
                             A descrição do item é obrigatória!
@@ -26,39 +26,20 @@
                     </c-col>
                 </c-row>
                 <c-row class="mt-md-3 d-flex align-items-center">
-                    <c-col *ngIf="liveForm.controls['category'] as ctrl">
-                        <label for="category">Categoria:</label>
-                        <select id="category" cSelect formControlName="category" [valid]=isValid(ctrl)>
-                            <option *ngFor="let category of (categories | keyvalue | enumOrder:categories)" [value]="category.key">
-                                {{ category.value }}
+                    <c-col *ngIf="liveForm.controls['categoryId'] as ctrl" [md]="4">
+                        <label for="categoryId">Categoria:</label>
+                        <select id="categoryId" cSelect formControlName="categoryId" [valid]=isValid(ctrl)>
+                            <option [ngValue]="null" disabled>Selecione...</option>
+                            <option *ngFor="let c of categories" [value]="c.id">
+                                {{ c.name }}
                             </option>
                         </select>
                         <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
                             Escolha uma categoria!
                         </c-form-feedback>
                     </c-col>
-                    <c-col *ngIf="liveForm.controls['conservationStatus'] as ctrl">
-                        <label for="conservationStatus">Estado de Conservação:</label>
-                        <select id="conservationStatus" cSelect formControlName="conservationStatus" [valid]=isValid(ctrl)>
-                            <option *ngFor="let status of (conservationStatus | keyvalue | enumOrder:conservationStatus)" [value]="status.key">
-                                {{ status.value }}
-                            </option>
-                        </select>
-                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
-                            Escolha um estado de conservação!
-                        </c-form-feedback>
-                    </c-col>
                 </c-row >
-                <c-row class="mt-md-3 d-flex align-items-center">
-                    <c-col *ngIf="liveForm.controls['imageSrc'] as ctrl">
-                        <label cLabel for="imageSrc">Imagem do Item</label>
-                        <input id="imageSrc" cFormControl type="file" 
-                            formControlName="imageSrc" [valid]=isValid(ctrl)>
-                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
-                            É necessário fazer upload de uma imagem!
-                        </c-form-feedback>
-                    </c-col>
-                </c-row>
+
             </c-container>
         </c-card-body>
     </c-card>
@@ -73,41 +54,6 @@
 
         <c-card-body>
             <c-container>
-                <c-row class="mt-md-3 d-flex align-items-center">
-                    <c-col [md]="3" *ngIf="liveForm.controls['cep'] as ctrl">
-                        <label cLabel for="cep">CEP:</label>
-                        <input id="cep" type="text" cFormControl [valid]=isValid(ctrl)
-                            formControlName="cep" (blur)="fetchAddressByCep()" mask="00.000-000">
-                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
-                            O CEP é obrigatório!
-                        </c-form-feedback>
-                    </c-col>
-                    <c-col *ngIf="liveForm.controls['street'] as ctrl">
-                        <label cLabel for="street">Rua:</label>
-                        <input id="street" type="text" cFormControl 
-                            formControlName="street" [valid]=isValid(ctrl)>
-                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
-                            A rua é obrigatória!
-                        </c-form-feedback>
-                    </c-col>
-                    <c-col [md]="2" *ngIf="liveForm.controls['houseNumber'] as ctrl">
-                        <label cLabel for="houseNumber">Número:</label>
-                        <input id="houseNumber" type="number" cFormControl 
-                            formControlName="houseNumber" [valid]=isValid(ctrl)>
-                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
-                            O número é obrigatório!
-                        </c-form-feedback>
-                    </c-col>
-                    <c-col [md]="4" *ngIf="liveForm.controls['neighborhood'] as ctrl">
-                        <label cLabel for="neighborhood">Bairro:</label>
-                        <input id="neighborhood" type="text" cFormControl 
-                            formControlName="neighborhood" [valid]=isValid(ctrl)>
-                        <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
-                            O bairro é obrigatório!
-                        </c-form-feedback>
-                    </c-col>
-                </c-row>
-
                 <c-row class="mt-md-3 d-flex align-items-center">
                     <c-col [md]="4" *ngIf="liveForm.controls['city'] as ctrl">
                         <label cLabel for="city">Cidade:</label>
@@ -124,17 +70,6 @@
                         <c-form-feedback *ngIf="ctrl.invalid" [valid]="false">
                             O estado é obrigatório!
                         </c-form-feedback>
-                    </c-col>
-                </c-row>
-
-                <c-row class="mt-md-3 d-flex align-items-center">
-                    <c-col [md]="3">
-                        <label cLabel for="addInfo">Complemento:</label>
-                        <input id="addInfo" type="text" cFormControl formControlName="addInfo">
-                    </c-col>
-                    <c-col>
-                        <label cLabel for="refPoint">Ponto de Referência:</label>
-                        <input id="refPoint" type="text" cFormControl formControlName="refPoint">
                     </c-col>
                 </c-row>
             </c-container>
@@ -164,7 +99,7 @@
         </div>
     </c-modal-body>
     <c-modal-footer>
-        <button class="pad-btn" (click)="toggleSuccessModal()" cButton color="success">
+        <button class="pad-btn" (click)="goToDashboard()" cButton color="success">
             Fechar
         </button>
     </c-modal-footer>

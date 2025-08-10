@@ -79,59 +79,6 @@
 								</c-col>
 							</c-row>
 							<c-row class="mb-3">
-								<label cCol [sm]="4" cLabel="col" for="login"
-									>Login</label
-								>
-								<c-col
-									[sm]="8"
-									*ngIf="
-										registerForm.controls[
-											'login'
-										] as ctrl
-									"
-								>
-									<input
-										cFormControl
-										id="login"
-										formControlName="login"
-										placeholder="Login"
-										autocomplete="off"
-										required
-										[valid]="
-											ctrl.touched && ctrl.valid
-												? true
-												: (submitted || ctrl.touched) &&
-												  ctrl.invalid
-												? false
-												: undefined
-										"
-									/>
-									<c-form-feedback
-										*ngIf="submitted || ctrl.invalid"
-										[valid]="!(submitted || ctrl.invalid)"
-									>
-										<ng-container
-											*ngIf="ctrl.errors as errors"
-										>
-											<div *ngIf="errors.required">
-												O login é obrigatório!
-											</div>
-											<div *ngIf="errors.minlength">
-												{{
-													formErrors.login
-														.minLength
-												}}
-											</div>
-											<div *ngIf="errors.pattern">
-												{{
-													formErrors.login.pattern
-												}}
-											</div>
-										</ng-container>
-									</c-form-feedback>
-								</c-col>
-							</c-row>
-							<c-row class="mb-3">
 								<label cCol [sm]="4" cLabel="col" for="email"
 									>E-mail</label
 								>

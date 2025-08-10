@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.doe_facil.dto.UpdateUserRoleDTO;
 import com.projeto.doe_facil.model.User;
-import com.projeto.doe_facil.repository.ItemRepository;
 import com.projeto.doe_facil.repository.UserRepository;
 
 import jakarta.validation.Valid;
@@ -26,7 +25,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AdminUserController {
   private final UserRepository userRepo;
-  private final ItemRepository itemRepository;
 
   @GetMapping
   @PreAuthorize("hasRole('ADMIN')")

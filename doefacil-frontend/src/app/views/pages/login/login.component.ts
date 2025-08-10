@@ -8,7 +8,9 @@ import { UserService } from "../../../services/user.service";
 import { LoginService } from "./../../../services/login.service";
 
 import { cilBook } from "@coreui/icons";
-import { TokenService } from "../../../services/token.service";
+import { AuthService } from "../../../services/auth.service";
+import { AuthRequest } from "../../../models/AuthRequest";
+
 
 @Component({
 	selector: "app-login",
@@ -42,12 +44,12 @@ export class LoginComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		public validationFormsService: ValidationFormsService,
 		private userService: UserService,
-		private tokenService: TokenService
+		private authService: AuthService
 	) {
 		this.formErrors = this.validationFormsService.errorMessages;
 
 		this.loginForm = this.authForm.group({
-			login: ["",[Validators.required]],
+			email: ["",[Validators.required, Validators.email]],
 			password: ["", [Validators.required]],
 		});
 
@@ -63,20 +65,38 @@ export class LoginComponent implements OnInit {
 	public getAuthForm() {
 		this.toggleSpinnerVisible();
 		
-		this.LoginService.loginAuth(this.loginForm.value).subscribe({
-			next: (response) => {
-				console.log(response.token);
-				this.tokenService.setToken(response.token);
+		let user: AuthRequest = {
+			email: this.loginForm.value.email,
+			password: this.loginForm.value.password
+		};
+
+		this.authService.login(user).subscribe({
+			next: () => {
 				this.toggleSpinnerVisible();
 				this.router.navigate(["/dashboard"]);
 			},
 			error: (err) => {
 				this.toggleSpinnerVisible();
 				this.loginErrorMessage =
-					"Login e/ou senha incorreto(s). Por favor, tente novamente.";
+					"E-mail e/ou senha incorreto(s). Por favor, tente novamente.";
 				this.toggleLoginError();
-			},
+			}
 		});
+
+		// this.LoginService.loginAuth(this.loginForm.value).subscribe({
+		// 	next: (response) => {
+		// 		console.log(response.token);
+		// 		this.tokenService.setToken(response.token);
+		// 		this.toggleSpinnerVisible();
+		// 		this.router.navigate(["/dashboard"]);
+		// 	},
+		// 	error: (err) => {
+		// 		this.toggleSpinnerVisible();
+		// 		this.loginErrorMessage =
+		// 			"Login e/ou senha incorreto(s). Por favor, tente novamente.";
+		// 		this.toggleLoginError();
+		// 	},
+		// });
 	}
 
 	//Chamada para o serviço de recuperação de senha

@@ -1,5 +1,5 @@
 import { UserAccessGuard } from "./guards/user-access.guard";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { LocationStrategy, PathLocationStrategy } from "@angular/common";
 import { BrowserModule, Title } from "@angular/platform-browser";
@@ -56,6 +56,7 @@ import { IconModule, IconSetService } from "@coreui/icons-angular";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { NgbModule, NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { ImageCropperModule } from "ngx-image-cropper";
+import { AuthInterceptor } from "./interceptors/auth.interceptor";
 
 
 const APP_CONTAINERS = [
@@ -112,13 +113,14 @@ const APP_CONTAINERS = [
 		NgbTypeahead
 	],
 	providers: [
-		{
-			provide: LocationStrategy,
-			useClass: PathLocationStrategy,
-		},
 		IconSetService,
 		Title,
 		UserAccessGuard,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true
+		}
 	],
 	bootstrap: [AppComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

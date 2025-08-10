@@ -1,0 +1,15 @@
+.container { max-width: 1120px; margin: 24px auto; padding: 0 16px; }
+.header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; border-radius: 16px;}
+.btn { padding:8px 12px; background:#22c55e; color:#04120a; text-decoration:none; border-radius:10px; font-weight:600; }
+.error { color:#fca5a5; }
+.grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.card { background:#1f2937; border-radius:16px; padding:14px; display:flex; flex-direction:column; gap:6px; }
+.title { font-weight:700; color: #e5e7eb;}
+.muted { color:#9ca3af; font-size:12px; }
+.status { font-size:12px; opacity:.9; }
+.status[data-status="AVAILABLE"] { color:#86efac; }
+.status[data-status="RESERVED"] { color:#fde68a; }
+.status[data-status="DONATED"], .status[data-status="REMOVED"] { color:#fca5a5; }
+.desc { color:#e5e7eb; font-size:14px; }
+.pager { display:flex; gap:12px; align-items:center; justify-content:center; margin: 16px 0; }
+.pager button { padding:8px 10px; border:0; border-radius:10px; background:#0ea5e9; color:#04120a; font-weight:600; cursor:pointer; }

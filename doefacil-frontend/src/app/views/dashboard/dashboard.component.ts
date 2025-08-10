@@ -1,27 +1,32 @@
-import { DEFAULT_ROLE } from "src/environments/environment";
-import User from "src/app/models/User";
-import { UserService } from "src/app/services/user.service";
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
+import { Page } from '../../models/Page';
+import { ItemResponse } from '../../models/ItemResponse';
+import { ItemService } from '../../services/item.service';
+
 
 @Component({
 	selector: "app-dashboard",
 	templateUrl: "./dashboard.component.html",
-	providers: [UserService],
+	styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent {
-	public flagError: boolean;
-	public loggedUser!: User;
+  page?: Page<ItemResponse>;
+  loading = false;
+  error = '';
+  size = 12;
 
-	constructor(
-		private userService: UserService,
-	) {
-		this.flagError = false;
-		this.loggedUser = this.userService.getLoggedUser();
-	}
+  constructor(private service: ItemService) {}
 
-	ngOnInit() {}
+  ngOnInit(): void { this.load(0); }
 
-	public setFlagError(valor: boolean) {
-		this.flagError = valor;
-	}
+  load(page: number) {
+    this.loading = true; this.error = '';
+    this.service.list(page, this.size).subscribe({
+      next: (p) => { this.page = p; this.loading = false; },
+      error: _ => { this.error = 'Falha ao carregar itens'; this.loading = false; }
+    });
+  }
+
+  prev() { if (this.page && this.page.number > 0) this.load(this.page.number - 1); }
+  next() { if (this.page && this.page.number < this.page.totalPages - 1) this.load(this.page.number + 1); }
 }

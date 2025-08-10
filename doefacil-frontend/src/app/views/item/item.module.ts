@@ -10,6 +10,7 @@ import { ButtonModule, CardModule, FormModule, GridModule, ModalModule } from '@
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PipesModule } from '../../utils/pipes/pipes.module';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { Router } from '@angular/router';
 
 
 @NgModule({
