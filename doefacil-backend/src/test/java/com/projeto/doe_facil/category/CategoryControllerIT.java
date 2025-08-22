@@ -4,7 +4,6 @@ import com.projeto.doe_facil.model.Category;
 import com.projeto.doe_facil.repository.CategoryRepository;
 import com.projeto.doe_facil.repository.InterestRepository;
 import com.projeto.doe_facil.repository.ItemRepository;
-import com.projeto.doe_facil.repository.UserRepository;
 import com.projeto.doe_facil.support.IntegrationTestSupport;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,15 +24,13 @@ class CategoryControllerIT extends IntegrationTestSupport {
   @Autowired private CategoryRepository categoryRepository;
   @Autowired(required = false) private ItemRepository itemRepository;
   @Autowired(required = false) private InterestRepository interestRepository;
-  @Autowired(required = false) private UserRepository userRepository; // só se for apagar users
 
   @BeforeEach
   void cleanAndSeed() {
-    // Limpeza na ordem correta (se existirem)
+    
     if (interestRepository != null) interestRepository.deleteAll();
     if (itemRepository != null) itemRepository.deleteAll();
     categoryRepository.deleteAll();
-    // if (userRepository != null) userRepository.deleteAll(); // use se necessário
 
     // Seed
     categoryRepository.save(Category.builder().name("Roupas").slug("roupas").build());

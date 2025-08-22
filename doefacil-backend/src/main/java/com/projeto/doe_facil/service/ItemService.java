@@ -1,13 +1,13 @@
 package com.projeto.doe_facil.service;
 
-import java.security.AccessControlException;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.projeto.doe_facil.dto.ItemCreateDTO;
 import com.projeto.doe_facil.dto.ItemResponseDTO;
+import com.projeto.doe_facil.dto.PageResponse;
+import com.projeto.doe_facil.dto.UserResponseDTO;
 import com.projeto.doe_facil.model.Item;
 import com.projeto.doe_facil.repository.CategoryRepository;
 import com.projeto.doe_facil.repository.ItemRepository;
@@ -39,8 +39,10 @@ public class ItemService {
     return toResponse(item);
   }
 
-  public Page<ItemResponseDTO> listAvailable(Pageable pageable) {
-    return itemRepo.findByStatus(Item.Status.AVAILABLE, pageable).map(this::toResponse);
+  public PageResponse<ItemResponseDTO> listAvailable(Pageable pageable) {
+
+    var item = itemRepo.findByStatus(Item.Status.AVAILABLE, pageable).map(this::toResponse);
+    return PageResponse.of(item);
   }
 
   @Transactional

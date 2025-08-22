@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.doe_facil.dto.ItemCreateDTO;
 import com.projeto.doe_facil.dto.ItemResponseDTO;
+import com.projeto.doe_facil.dto.PageResponse;
 import com.projeto.doe_facil.model.Item;
 import com.projeto.doe_facil.model.User;
 import com.projeto.doe_facil.service.ItemService;
@@ -40,7 +41,7 @@ public class ItemController {
   }
 
   @GetMapping
-  public Page<ItemResponseDTO> list(@PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable p) {
+  public PageResponse<ItemResponseDTO> list(@PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable p) {
     return service.listAvailable(p);
   }
 

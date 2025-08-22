@@ -23,16 +23,30 @@ public class DataSeeder implements CommandLineRunner {
             User user = User.builder()
                     .name("João da Silva")
                     .email("joao@email.com")
-                    .password(new BCryptPasswordEncoder().encode("123456")) // por enquanto pode ser sem encoder
+                    .password(new BCryptPasswordEncoder().encode("123456"))
                     .role(User.Role.USER)
                     .build();
             userRepository.save(user);
+
+            User adminUser = User.builder()
+                    .name("Marcelo da Silva")
+                    .email("marcelo@email.com")
+                    .password(new BCryptPasswordEncoder().encode("123456"))
+                    .role(User.Role.ADMIN)
+                    .build();
+            userRepository.save(adminUser);
         }
 
         if (categoryRepository.count() == 0) {
             categoryRepository.save(Category.builder().name("Roupas").slug("roupas").build());
+            categoryRepository.save(Category.builder().name("Calçados").slug("calcados").build());
+            categoryRepository.save(Category.builder().name("Eletrodomésticos").slug("eletrodomesticos").build());
             categoryRepository.save(Category.builder().name("Eletrônicos").slug("eletronicos").build());
+            categoryRepository.save(Category.builder().name("Livros").slug("livros").build());
             categoryRepository.save(Category.builder().name("Móveis").slug("moveis").build());
+            categoryRepository.save(Category.builder().name("Materiais de escritório").slug("escritorio").build());
+            categoryRepository.save(Category.builder().name("Artigos esportivos").slug("esportivos").build());
+            categoryRepository.save(Category.builder().name("Outra").slug("outra").build());
         }
     }
 }

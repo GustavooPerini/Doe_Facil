@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projeto.doe_facil.dto.PageResponse;
 import com.projeto.doe_facil.dto.UpdateUserRoleDTO;
+import com.projeto.doe_facil.dto.UserResponseDTO;
 import com.projeto.doe_facil.model.User;
 import com.projeto.doe_facil.repository.UserRepository;
 
@@ -28,8 +30,9 @@ public class AdminUserController {
 
   @GetMapping
   @PreAuthorize("hasRole('ADMIN')")
-  public Page<User> list(@PageableDefault(size=20, sort="id") Pageable p) {
-    return userRepo.findAll(p);
+  public PageResponse<UserResponseDTO> list(@PageableDefault(size = 20, sort = "id") Pageable p) {
+    var page = userRepo.findAll(p).map(UserResponseDTO::of);
+    return PageResponse.of(page);
   }
 
   @GetMapping("/{id}")

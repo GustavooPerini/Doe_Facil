@@ -6,7 +6,7 @@ import { PaginationModule } from "ngx-bootstrap/pagination";
 
 import { UserRoutingModule } from "./user-routing.module";
 import { UserViewerComponent } from "./user-viewer/user-viewer.component";
-import { UserEditComponent } from "./user-edit/user-edit.component";
+
 
 import { IconModule, IconSetService } from "@coreui/icons-angular";
 
@@ -35,6 +35,7 @@ import {
 } from "@coreui/angular";
 import { RouterModule } from "@angular/router";
 import { UserNewComponent } from "./user-new/user-new.component";
+import { UserEditComponent } from "./user-edit/user-edit.component";
 
 @NgModule({
 	declarations: [UserViewerComponent, UserEditComponent, UserNewComponent],

@@ -11,7 +11,7 @@
     <div class="card" *ngFor="let it of page.content">
       <div class="title">{{ it.title }}</div>
       <div class="muted">{{ it.category }} • {{ it.city }}/{{ it.state }}</div>
-      <div class="status" [attr.data-status]="it.status">{{ it.status }}</div>
+      <div class="status" [attr.data-status]="it.status">Disponível</div>
       <div class="desc">{{ it.description }}</div>
     </div>
   </div>

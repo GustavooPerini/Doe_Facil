@@ -64,7 +64,7 @@ export const navItems: INavData[] = [
 	{
 		name: "Item",
 		url:"dashboard/item",
-		iconComponent: { name: "cilAddressBook" },
+		iconComponent: { name: "cilInbox" },
 		children: [
 			{
 				name: "Anúnciar Item",
