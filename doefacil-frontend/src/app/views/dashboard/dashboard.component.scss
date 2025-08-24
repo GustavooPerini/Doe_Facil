@@ -13,3 +13,11 @@
 .desc { color:#e5e7eb; font-size:14px; }
 .pager { display:flex; gap:12px; align-items:center; justify-content:center; margin: 16px 0; }
 .pager button { padding:8px 10px; border:0; border-radius:10px; background:#0ea5e9; color:#04120a; font-weight:600; cursor:pointer; }
+
+/* novos estilos */
+.interest-btn { margin-top: 8px; align-self:flex-start; padding:6px 10px; border-radius:8px; border:0; background:#22c55e; color:#04120a; font-weight:600; cursor:pointer; }
+.interest-form { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+.interest-form textarea { width:100%; background:#111827; color:#e5e7eb; border:1px solid #374151; border-radius:8px; padding:8px; resize:vertical; }
+.row { display:flex; gap:8px; }
+.send-btn { padding:6px 10px; border-radius:8px; border:0; background:#0ea5e9; color:#04120a; font-weight:600; cursor:pointer; }
+.cancel-btn { padding:6px 10px; border-radius:8px; border:1px solid #374151; background:transparent; color:#e5e7eb; cursor:pointer; }

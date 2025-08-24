@@ -33,7 +33,7 @@ import {
 	WidgetModule,
 	ModalModule,
 } from "@coreui/angular";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
 	declarations: [
@@ -51,6 +51,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 		ButtonModule,
 		CardModule,
 		DropdownModule,
+		FormsModule,
 		FooterModule,
 		FormModule,
 		ReactiveFormsModule,

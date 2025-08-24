@@ -13,6 +13,36 @@
       <div class="muted">{{ it.category }} • {{ it.city }}/{{ it.state }}</div>
       <div class="status" [attr.data-status]="it.status">Disponível</div>
       <div class="desc">{{ it.description }}</div>
+
+      <button class="interest-btn"
+              (click)="toggleInterest(it.id)"
+              [disabled]="it.status !== 'AVAILABLE'">
+        Tenho interesse
+      </button>
+
+      <div class="interest-form" *ngIf="interestOpen[it.id]">
+        <textarea
+          [(ngModel)]="interestMsg[it.id]"
+          placeholder="Escreva uma breve mensagem para o doador"
+          rows="3">
+        </textarea>
+
+        <div class="row">
+          <button class="send-btn"
+                  (click)="sendInterest(it.id)"
+                  [disabled]="interestLoading[it.id] || !(interestMsg[it.id]?.trim())">
+            {{ interestLoading[it.id] ? 'Enviando...' : 'Enviar' }}
+          </button>
+          <button class="cancel-btn"
+                  (click)="toggleInterest(it.id)"
+                  [disabled]="interestLoading[it.id]">
+            Cancelar
+          </button>
+        </div>
+
+        <div class="muted" *ngIf="interestSuccess[it.id]">Interesse enviado!</div>
+        <div class="error" *ngIf="interestError[it.id]">{{ interestError[it.id] }}</div>
+      </div>
     </div>
   </div>
 
