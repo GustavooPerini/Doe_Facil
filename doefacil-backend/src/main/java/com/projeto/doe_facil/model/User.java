@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -32,35 +33,71 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class User implements UserDetails{
-  
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User implements UserDetails {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank private String name;
+  @NotBlank
+  private String name;
 
-  @Email @NotBlank private String email;
+  @Email
+  @NotBlank
+  private String email;
 
-  @NotBlank private String password;
+  @NotBlank
+  private String password;
 
-  @Enumerated(EnumType.STRING) @NotNull
+  @Enumerated(EnumType.STRING)
+  @NotNull
   private Role role;
 
   @JsonIgnore
   @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
   private List<Item> items = new ArrayList<>();
 
-  public enum Role { USER, ADMIN }
+  public enum Role {
+    USER, ADMIN
+  }
 
-  @Override public Collection<? extends GrantedAuthority> getAuthorities() {
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
   }
-  @Override public String getUsername() { return email; }
-  @Override public String getPassword() { return password; }
-  @Override public boolean isAccountNonExpired() { return true; }
-  @Override public boolean isAccountNonLocked() { return true; }
-  @Override public boolean isCredentialsNonExpired() { return true; }
-  @Override public boolean isEnabled() { return true; }
-}
 
+  @Override
+  public String getUsername() {
+    return email;
+  }
+
+  @Override
+  public String getPassword() {
+    return password;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
+}

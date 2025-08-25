@@ -13,4 +13,5 @@ import com.projeto.doe_facil.model.Item;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long>, JpaSpecificationExecutor<Item> {
   Page<Item> findByStatus(Item.Status status, Pageable pageable);
+  Page<Item> findByOwnerId(Long ownerId, Pageable pageable);
 }

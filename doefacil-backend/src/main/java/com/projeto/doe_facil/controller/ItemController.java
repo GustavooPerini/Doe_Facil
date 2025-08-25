@@ -1,6 +1,5 @@
 package com.projeto.doe_facil.controller;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -36,19 +35,27 @@ public class ItemController {
 
   @PostMapping
   public ResponseEntity<ItemResponseDTO> create(@Valid @RequestBody ItemCreateDTO dto,
-                                                @AuthenticationPrincipal User user) {
+      @AuthenticationPrincipal User user) {
     return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto, user.getId()));
   }
 
   @GetMapping
-  public PageResponse<ItemResponseDTO> list(@PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable p) {
+  public PageResponse<ItemResponseDTO> list(
+      @PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable p) {
     return service.listAvailable(p);
+  }
+
+  @GetMapping("/my-items")
+  public PageResponse<ItemResponseDTO> listMyItems(
+      @PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable p,
+      @AuthenticationPrincipal User user) {
+    return service.listByOwner(user.getId(), p);
   }
 
   @PatchMapping("/{id}/status")
   public ResponseEntity<Void> changeStatus(@PathVariable Long id,
-                                           @RequestParam Item.Status status,
-                                           @AuthenticationPrincipal User user) {
+      @RequestParam Item.Status status,
+      @AuthenticationPrincipal User user) {
     service.changeStatus(id, status, user.getId());
     return ResponseEntity.noContent().build();
   }

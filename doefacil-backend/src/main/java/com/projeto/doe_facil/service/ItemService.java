@@ -1,13 +1,11 @@
 package com.projeto.doe_facil.service;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.projeto.doe_facil.dto.ItemCreateDTO;
 import com.projeto.doe_facil.dto.ItemResponseDTO;
 import com.projeto.doe_facil.dto.PageResponse;
-import com.projeto.doe_facil.dto.UserResponseDTO;
 import com.projeto.doe_facil.model.Item;
 import com.projeto.doe_facil.repository.CategoryRepository;
 import com.projeto.doe_facil.repository.ItemRepository;
@@ -16,7 +14,8 @@ import com.projeto.doe_facil.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class ItemService {
   private final ItemRepository itemRepo;
   private final UserRepository userRepo;
@@ -39,6 +38,11 @@ public class ItemService {
     return toResponse(item);
   }
 
+  public PageResponse<ItemResponseDTO> listByOwner(Long ownerId, Pageable pageable) {
+    var items = itemRepo.findByOwnerId(ownerId, pageable).map(this::toResponse);
+    return PageResponse.of(items);
+  }
+
   public PageResponse<ItemResponseDTO> listAvailable(Pageable pageable) {
 
     var item = itemRepo.findByStatus(Item.Status.AVAILABLE, pageable).map(this::toResponse);
@@ -48,7 +52,8 @@ public class ItemService {
   @Transactional
   public void changeStatus(Long itemId, Item.Status status, Long requesterId) {
     var item = itemRepo.findById(itemId).orElseThrow();
-    //if (!item.getOwner().getId().equals(requesterId)) throw new AccessControlException("not owner");
+    // if (!item.getOwner().getId().equals(requesterId)) throw new
+    // AccessControlException("not owner");
     item.setStatus(status);
   }
 

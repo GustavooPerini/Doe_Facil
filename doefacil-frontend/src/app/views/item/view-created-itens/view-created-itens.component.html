@@ -1,1 +1,23 @@
-<p>Itens Anunciados</p>
+<div class="container">
+  <div class="header">
+    <h2>Meus Itens Anunciados</h2>
+  </div>
+
+  <div *ngIf="loading">Carregando...</div>
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <div class="grid" *ngIf="page">
+    <div class="card" *ngFor="let it of page.content">
+      <div class="title">{{ it.title }}</div>
+      <div class="muted">{{ it.category }} • {{ it.city }}/{{ it.state }}</div>
+      <div class="status" [attr.data-status]="it.status">{{ it.status }}</div>
+      <div class="desc">{{ it.description }}</div>
+      </div>
+  </div>
+
+  <div class="pager" *ngIf="page">
+    <button (click)="prev()" [disabled]="page.number === 0">Anterior</button>
+    <span>Página {{ page.number + 1 }} de {{ page.totalPages || 1 }}</span>
+    <button (click)="next()" [disabled]="page.number >= (page.totalPages - 1)">Próxima</button>
+  </div>
+</div>

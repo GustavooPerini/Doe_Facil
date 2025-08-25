@@ -63,23 +63,23 @@ export const navItems: INavData[] = [
 	// },
 	{
 		name: "Item",
-		url:"dashboard/item",
+		url: "dashboard/item",
 		iconComponent: { name: "cilInbox" },
 		children: [
 			{
 				name: "Anúnciar Item",
-				url:"/dashboard/item/novo",
+				url: "/dashboard/item/novo",
 			},
 			{
 				name: "Itens Anunciados",
-				url:"/dashboard/item/itens_anunciados",
+				url: "/dashboard/item/itens_anunciados",
 			},
 			{
 				name: "Itens Recebidos",
-				url:"/dashboard/item/itens_recebidos",
+				url: "/dashboard/item/itens_recebidos",
 			},
-		]
-	}
+		],
+	},
 ];
 
 // ##################################################################################################################
@@ -161,6 +161,25 @@ export const navItemsRoleUser: INavData[] = [
 				name: "Meus dados",
 				url: "/dashboard/usuario/editar",
 				iconComponent: { name: "" },
+			},
+		],
+	},
+	{
+		name: "Item",
+		url: "dashboard/item",
+		iconComponent: { name: "cilInbox" },
+		children: [
+			{
+				name: "Anúnciar Item",
+				url: "/dashboard/item/novo",
+			},
+			{
+				name: "Itens Anunciados",
+				url: "/dashboard/item/itens_anunciados",
+			},
+			{
+				name: "Itens Recebidos",
+				url: "/dashboard/item/itens_recebidos",
 			},
 		],
 	},
