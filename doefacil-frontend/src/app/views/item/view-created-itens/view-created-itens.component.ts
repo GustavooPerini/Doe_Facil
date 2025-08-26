@@ -15,7 +15,8 @@ export class ViewCreatedItensComponent {
 	error = "";
 	size = 12;
 
-	interestsOpen: Record<number, boolean> = {};
+	modalOpen = false;
+  	modalItem?: ItemResponse;
 	interests: Record<number, InterestView[]> = {};
 	interestsLoading: Record<number, boolean> = {};
 	interestsError: Record<number, string> = {};
@@ -54,12 +55,18 @@ export class ViewCreatedItensComponent {
 		}
 	}
 
-	toggleInterests(itemId: number) {
-    this.interestsOpen[itemId] = !this.interestsOpen[itemId];
-    if (this.interestsOpen[itemId] && !this.interests[itemId]) {
-      this.loadInterests(itemId);
-    }
-  }
+	openInterestsModal(item: ItemResponse) {
+		this.modalItem = item;
+		this.modalOpen = true;
+		if (!this.interests[item.id]) {
+		this.loadInterests(item.id);
+		}
+  	}
+
+	closeModal() {
+		this.modalOpen = false;
+		this.modalItem = undefined;
+  	}
 
   loadInterests(itemId: number) {
     this.interestsLoading[itemId] = true;

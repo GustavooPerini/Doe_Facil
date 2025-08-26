@@ -13,43 +13,58 @@
       <div class="status" [attr.data-status]="it.status">{{ it.status }}</div>
       <div class="desc">{{ it.description }}</div>
 
-      <button class="btn" (click)="toggleInterests(it.id)">
+      <button class="btn" (click)="openInterestsModal(it)">
         Interessados
         <ng-container *ngIf="interests[it.id]">({{ interests[it.id].length }})</ng-container>
       </button>
+    </div>
+  </div>
+  
+  <div class="modal-backdrop" *ngIf="modalOpen">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="gugu">Interessados: {{ modalItem?.title }}</h3>
+        <button class="close-btn" (click)="closeModal()">×</button>
+      </div>
 
-      <div class="interests" *ngIf="interestsOpen[it.id]">
-        <div class="muted" *ngIf="interestsLoading[it.id]">Carregando interessados...</div>
-        <div class="error" *ngIf="interestsError[it.id]">{{ interestsError[it.id] }}</div>
+      <div class="modal-body">
+        <div class="muted" *ngIf="modalItem && interestsLoading[modalItem.id]">Carregando interessados...</div>
+        <div class="error" *ngIf="modalItem && interestsError[modalItem.id]">{{ interestsError[modalItem.id] }}</div>
 
-        <div class="interest-row" *ngFor="let intr of interests[it.id]">
-          <div class="who">
-            <div class="name">{{ intr.requesterName }}</div>
-            <div class="email muted">{{ intr.requesterEmail }}</div>
-            <div class="msg">{{ intr.message }}</div>
-            <div class="muted small">{{ intr.createdAt | date:'short' }}</div>
+        <ng-container *ngIf="modalItem">
+          <div class="interest-row" *ngFor="let intr of interests[modalItem.id]">
+            <div class="who">
+              <div class="name">{{ intr.requesterName }}</div>
+              <div class="email muted">{{ intr.requesterEmail }}</div>
+              <div class="msg">{{ intr.message }}</div>
+              <div class="muted small">{{ intr.createdAt | date:'short' }}</div>
+            </div>
+
+            <div class="actions">
+              <span class="badge" [attr.data-status]="intr.status">{{ intr.status }}</span>
+
+              <button class="accept"
+                      (click)="decide(intr.id, modalItem.id, true)"
+                      [disabled]="intr.status !== 'PENDING' || decisionLoading[intr.id]">
+                {{ decisionLoading[intr.id] ? 'Enviando...' : 'Aceitar' }}
+              </button>
+
+              <button class="reject"
+                      (click)="decide(intr.id, modalItem.id, false)"
+                      [disabled]="intr.status !== 'PENDING' || decisionLoading[intr.id]">
+                Recusar
+              </button>
+            </div>
           </div>
 
-          <div class="actions">
-            <span class="badge" [attr.data-status]="intr.status">{{ intr.status }}</span>
-
-            <button class="accept"
-                    (click)="decide(intr.id, it.id, true)"
-                    [disabled]="intr.status !== 'PENDING' || decisionLoading[intr.id]">
-              {{ decisionLoading[intr.id] ? 'Enviando...' : 'Aceitar' }}
-            </button>
-
-            <button class="reject"
-                    (click)="decide(intr.id, it.id, false)"
-                    [disabled]="intr.status !== 'PENDING' || decisionLoading[intr.id]">
-              Recusar
-            </button>
+          <div class="muted" *ngIf="!interestsLoading[modalItem.id] && (interests[modalItem.id]?.length || 0) === 0">
+            Nenhum interessado ainda.
           </div>
-        </div>
+        </ng-container>
+      </div>
 
-        <div class="muted" *ngIf="!interestsLoading[it.id] && interests[it.id]?.length === 0">
-          Nenhum interessado ainda.
-        </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closeModal()">Fechar</button>
       </div>
     </div>
   </div>
