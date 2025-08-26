@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { ItemResponse } from "../../../models/ItemResponse";
 import { ItemService } from "../../../services/item.service";
 import { Page } from "../../../models/Page";
+import { InterestService, InterestView } from "../../../services/interest.service";
 
 @Component({
 	selector: "app-view-created-itens",
@@ -14,7 +15,13 @@ export class ViewCreatedItensComponent {
 	error = "";
 	size = 12;
 
-	constructor(private itemService: ItemService) {}
+	interestsOpen: Record<number, boolean> = {};
+	interests: Record<number, InterestView[]> = {};
+	interestsLoading: Record<number, boolean> = {};
+	interestsError: Record<number, string> = {};
+	decisionLoading: Record<number, boolean> = {};
+
+	constructor(private itemService: ItemService, private interestService: InterestService) {}
 
 	ngOnInit(): void {
 		this.load(0);
@@ -46,4 +53,42 @@ export class ViewCreatedItensComponent {
 			this.load(this.page.number + 1);
 		}
 	}
+
+	toggleInterests(itemId: number) {
+    this.interestsOpen[itemId] = !this.interestsOpen[itemId];
+    if (this.interestsOpen[itemId] && !this.interests[itemId]) {
+      this.loadInterests(itemId);
+    }
+  }
+
+  loadInterests(itemId: number) {
+    this.interestsLoading[itemId] = true;
+    this.interestsError[itemId] = '';
+    this.interestService.listByItem(itemId).subscribe({
+      next: (list) => {
+        this.interests[itemId] = list;
+        this.interestsLoading[itemId] = false;
+      },
+      error: _ => {
+        this.interestsError[itemId] = 'Falha ao carregar interessados';
+        this.interestsLoading[itemId] = false;
+      }
+    });
+  }
+
+  decide(interestId: number, itemId: number, accept: boolean) {
+    this.decisionLoading[interestId] = true;
+    this.interestService.decide(interestId, accept).subscribe({
+      next: _ => {
+        this.decisionLoading[interestId] = false;
+        // Recarrega a lista para refletir o novo status
+        this.loadInterests(itemId);
+      },
+      error: _ => {
+        this.decisionLoading[interestId] = false;
+        this.interestsError[itemId] = 'Falha ao enviar decisão';
+      }
+    });
+  }
+
 }

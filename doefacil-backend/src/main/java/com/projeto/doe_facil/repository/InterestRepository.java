@@ -9,4 +9,5 @@ import com.projeto.doe_facil.model.Interest;
 public interface InterestRepository extends JpaRepository<Interest, Long> {
   boolean existsByItemIdAndInterestedId(Long itemId, Long userId);
   List<Interest> findByItemId(Long itemId);
+  List<Interest> findByItemIdOrderByCreatedAtDesc(Long itemId);
 }
